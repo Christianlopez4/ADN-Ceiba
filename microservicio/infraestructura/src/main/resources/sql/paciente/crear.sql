@@ -1,0 +1,2 @@
+insert into paciente (id, nombre, apellidos, fecha_nacimiento, correo_electronico, telefono, id_categoria, id_documento)
+values (:id, :nombre, :apellidos, :fechaNacimiento, :correoElectronico, :telefono, :idCategoria, :idDocumento)

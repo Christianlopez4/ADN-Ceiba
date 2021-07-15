@@ -1,13 +1,17 @@
-package com.ceiba.paciente.modelo.dto;
+package com.ceiba.paciente.comando;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.sql.Date;
 
 @Getter
+@Setter
 @AllArgsConstructor
-public class DtoPaciente {
+@NoArgsConstructor
+public class ComandoPaciente {
 
     private Long id;
     private String nombre;
@@ -17,5 +21,4 @@ public class DtoPaciente {
     private Long telefono;
     private Integer idCategoria;
     private Integer idDocumento;
-
 }

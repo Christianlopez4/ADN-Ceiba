@@ -11,12 +11,12 @@ import java.sql.SQLException;
 public class MapeoPaciente implements RowMapper<DtoPaciente>, MapperResult {
     @Override
     public DtoPaciente mapRow(ResultSet rs, int rowNum) throws SQLException {
-        String id = rs.getString("id");
+        Long id = rs.getLong("id");
         String nombre = rs.getString("nombre");
         String apellidos = rs.getString("apellidos");
         Date fechaNacimiento = rs.getDate("fecha_nacimiento");
         String correo = rs.getString("correo_electronico");
-        String telefono = rs.getString("telefono");
+        Long telefono = rs.getLong("telefono");
         Integer idCategoria = rs.getInt("id_categoria");
         Integer idDocumento = rs.getInt("id_categoria");
 
