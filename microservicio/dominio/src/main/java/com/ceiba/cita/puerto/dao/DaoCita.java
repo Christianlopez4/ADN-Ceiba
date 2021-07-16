@@ -7,4 +7,5 @@ import java.util.List;
 public interface DaoCita {
 
     public List<DtoCita> listar();
+
 }
