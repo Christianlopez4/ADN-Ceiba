@@ -15,5 +15,5 @@ public class DtoCita {
     private Time hora;
     private Double costo;
     private Long idPaciente;
-    private Integer idEstado;
+    private String estado;
 }

@@ -13,14 +13,14 @@ public class Cita {
     private Time hora;
     private Double costo;
     private Long idPaciente;
-    private Integer idEstado;
+    private String estado;
 
-    public Cita(Long id, Date fecha, Time hora, Double costo, Long idPaciente, Integer idEstado) {
+    public Cita(Long id, Date fecha, Time hora, Double costo, Long idPaciente, String estado) {
         this.id = id;
         this.fecha = fecha;
         this.hora = hora;
         this.costo = costo;
         this.idPaciente = idPaciente;
-        this.idEstado = idEstado;
+        this.estado = estado;
     }
 }

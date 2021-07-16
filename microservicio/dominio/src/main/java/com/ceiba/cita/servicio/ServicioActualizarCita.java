@@ -21,7 +21,6 @@ public class ServicioActualizarCita {
 
     public void ejecutar(Cita cita) {
         validarDia(cita);
-        validarMultipleCitaElMismoDia(cita);
         validarFestivo(cita);
         this.repositorioCita.actualizar(cita);
     }
@@ -42,10 +41,4 @@ public class ServicioActualizarCita {
 
     }
 
-    private void validarMultipleCitaElMismoDia(Cita cita) throws ExcepcionMultipleCitaElMismoDia {
-        boolean existe = this.repositorioCita.existeMultipleCita(cita.getIdPaciente(), cita.getFecha());
-        if (existe) {
-            throw new ExcepcionMultipleCitaElMismoDia("MENSAJE_MULTIPLE_CITA");
-        }
-    }
 }
