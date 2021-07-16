@@ -1,0 +1,1 @@
+Select * from paciente where id=:id

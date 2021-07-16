@@ -4,8 +4,8 @@ import com.ceiba.cita.excepcion.ExcepcionDiaInvalido;
 import com.ceiba.cita.excepcion.ExcepcionMultipleCitaElMismoDia;
 import com.ceiba.cita.modelo.entidad.Cita;
 import com.ceiba.cita.puerto.repositorio.RepositorioCita;
+import com.ceiba.cita.utils.HolidayUtil;
 
-import java.sql.Date;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
@@ -16,14 +16,17 @@ public class ServicioCrearCita {
 
     private RepositorioCita repositorioCita;
 
+    private HolidayUtil holidayUtil;
+
     public ServicioCrearCita(RepositorioCita repositorioCita) {
         this.repositorioCita = repositorioCita;
+        this.holidayUtil = new HolidayUtil(2021);
     }
 
     public Long ejecutar(Cita cita) {
         validarDia(cita);
-        validarMultipleCitaElMismoDia(cita);
         validarFestivo(cita);
+        validarMultipleCitaElMismoDia(cita);
         return this.repositorioCita.crear(cita);
     }
 
@@ -40,7 +43,12 @@ public class ServicioCrearCita {
     }
 
     private void validarFestivo(Cita cita) {
-
+        Integer dia = cita.getFecha().getDay();
+        Integer mes = cita.getFecha().getMonth();
+        Boolean festivo = this.holidayUtil.isHoliday(mes, dia);
+        if (festivo) {
+            cita.setCosto(cita.getCosto() * 2);
+        }
     }
 
     private void validarMultipleCitaElMismoDia(Cita cita) throws ExcepcionMultipleCitaElMismoDia {
