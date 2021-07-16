@@ -1,0 +1,1 @@
+INSERT INTO CITA(fecha, hora, costo, id_paciente, estado) VALUES(:fecha, :hora, :costo, :idPaciente, :estado)
