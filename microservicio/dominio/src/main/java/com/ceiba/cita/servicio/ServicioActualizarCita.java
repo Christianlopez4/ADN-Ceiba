@@ -20,25 +20,7 @@ public class ServicioActualizarCita {
     }
 
     public void ejecutar(Cita cita) {
-        validarDia(cita);
-        validarFestivo(cita);
         this.repositorioCita.actualizar(cita);
-    }
-
-    private void validarDia(Cita cita) {
-        GregorianCalendar g = new GregorianCalendar();
-        g.setTime(cita.getFecha());
-
-        int diaSemana = g.get(Calendar.DAY_OF_WEEK);
-
-        if (diaSemana == 1 || diaSemana == 7) {
-            throw new ExcepcionDiaInvalido("MENSAJE_DIA_INVALIDO");
-        }
-
-    }
-
-    private void validarFestivo(Cita cita) {
-
     }
 
 }

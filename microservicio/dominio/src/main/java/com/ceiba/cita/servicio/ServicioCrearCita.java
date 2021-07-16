@@ -17,8 +17,6 @@ public class ServicioCrearCita {
 
     private RepositorioCita repositorioCita;
 
-    private RepositorioPaciente repositorioPaciente;
-
     private HolidayUtil holidayUtil;
 
     public ServicioCrearCita(RepositorioCita repositorioCita) {
