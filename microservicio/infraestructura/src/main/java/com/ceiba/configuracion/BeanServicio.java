@@ -1,5 +1,7 @@
 package com.ceiba.configuracion;
 
+import com.ceiba.cita.puerto.repositorio.RepositorioCita;
+import com.ceiba.cita.servicio.ServicioCrearCita;
 import com.ceiba.paciente.puerto.repositorio.RepositorioPaciente;
 import com.ceiba.paciente.servicio.ServicioCrearPaciente;
 import com.ceiba.usuario.puerto.repositorio.RepositorioUsuario;
@@ -30,5 +32,10 @@ public class BeanServicio {
     @Bean
     public ServicioCrearPaciente servicioCrearPaciente(RepositorioPaciente repositorioPaciente) {
         return new ServicioCrearPaciente(repositorioPaciente);
+    }
+
+    @Bean
+    public ServicioCrearCita servicioCrearCita(RepositorioCita repositorioCita) {
+        return new ServicioCrearCita(repositorioCita);
     }
 }

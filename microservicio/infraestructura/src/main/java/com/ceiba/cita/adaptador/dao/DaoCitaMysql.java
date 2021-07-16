@@ -1,4 +1,4 @@
-package com.ceiba.cita.adaptador;
+package com.ceiba.cita.adaptador.dao;
 
 import com.ceiba.cita.modelo.dto.DtoCita;
 import com.ceiba.cita.puerto.dao.DaoCita;
