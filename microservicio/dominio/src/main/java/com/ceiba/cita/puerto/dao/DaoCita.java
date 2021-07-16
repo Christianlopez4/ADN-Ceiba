@@ -6,5 +6,7 @@ import java.util.List;
 
 public interface DaoCita {
 
-    public List<DtoCita> listar();
+    List<DtoCita> listar();
+
+    DtoCita buscar(Integer id);
 }

@@ -5,6 +5,7 @@ import com.ceiba.cita.excepcion.ExcepcionMultipleCitaElMismoDia;
 import com.ceiba.cita.modelo.entidad.Cita;
 import com.ceiba.cita.puerto.repositorio.RepositorioCita;
 import com.ceiba.cita.utils.HolidayUtil;
+import com.ceiba.paciente.puerto.repositorio.RepositorioPaciente;
 
 import java.util.Calendar;
 import java.util.GregorianCalendar;

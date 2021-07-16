@@ -7,4 +7,6 @@ import java.util.List;
 public interface DaoCategoria {
 
     List<DtoCategoria> listar();
+
+    DtoCategoria buscar(Integer id);
 }

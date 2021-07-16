@@ -6,5 +6,7 @@ import java.util.List;
 
 public interface DaoPaciente {
 
-    public List<DtoPaciente> listar();
+    List<DtoPaciente> listar();
+
+    DtoPaciente buscar(Long id);
 }
