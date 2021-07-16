@@ -5,26 +5,25 @@ import com.ceiba.cita.excepcion.ExcepcionMultipleCitaElMismoDia;
 import com.ceiba.cita.modelo.entidad.Cita;
 import com.ceiba.cita.puerto.repositorio.RepositorioCita;
 
-import java.sql.Date;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
-public class ServicioCrearCita {
+public class ServicioActualizarCita {
 
     private final static String MENSAJE_DIA_INVALIDO = "No es posible agendar citas los días sábados o domingos";
     private final static String MENSAJE_MULTIPLE_CITA = "No es posible agendar más de una cita el mismo día";
 
     private RepositorioCita repositorioCita;
 
-    public ServicioCrearCita(RepositorioCita repositorioCita) {
+    public ServicioActualizarCita(RepositorioCita repositorioCita) {
         this.repositorioCita = repositorioCita;
     }
 
-    public Long ejecutar(Cita cita) {
+    public void ejecutar(Cita cita) {
         validarDia(cita);
         validarMultipleCitaElMismoDia(cita);
         validarFestivo(cita);
-        return this.repositorioCita.crear(cita);
+        this.repositorioCita.actualizar(cita);
     }
 
     private void validarDia(Cita cita) {

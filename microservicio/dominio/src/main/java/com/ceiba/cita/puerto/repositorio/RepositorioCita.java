@@ -8,5 +8,7 @@ public interface RepositorioCita {
 
     Long crear(Cita cita);
 
+    void actualizar(Cita cita);
+
     Boolean existeMultipleCita(Long idPaciente, Date fecha);
 }

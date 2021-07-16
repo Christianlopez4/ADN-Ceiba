@@ -17,6 +17,9 @@ public class RepositorioCitaMysql implements RepositorioCita {
     @SqlStatement(namespace="cita", value="crear")
     private static String sqlCrear;
 
+    @SqlStatement(namespace="cita", value="actualizar")
+    private static String sqlActualizar;
+
     @SqlStatement(namespace="cita", value="existeMultipleCita")
     private static String sqlExisteMultipleCita;
 
@@ -27,6 +30,11 @@ public class RepositorioCitaMysql implements RepositorioCita {
     @Override
     public Long crear(Cita cita) {
         return this.customNamedParameterJdbcTemplate.crear(cita, sqlCrear);
+    }
+
+    @Override
+    public void actualizar(Cita cita) {
+        this.customNamedParameterJdbcTemplate.actualizar(cita, sqlActualizar);
     }
 
     @Override
