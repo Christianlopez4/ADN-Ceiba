@@ -12,7 +12,7 @@ pipeline {
 
   //Una sección que define las herramientas “preinstaladas” en Jenkins
   tools {
-    jdk 'JDK8_Centos' //Verisión preinstalada en la Configuración del Master
+    jdk 'JDK11_Centos' //Verisión preinstalada en la Configuración del Master
   }
 /*	Versiones disponibles
       JDK8_Mac
@@ -30,13 +30,32 @@ pipeline {
     stage('Checkout') {
       steps{
         echo "------------>Checkout<------------"
+        checkout([
+        $class: 'GitSCM',
+        branches: [[name: '*/main']],
+        doGenerateSubmoduleConfigurations: false,
+        extensions: [],
+        gitTool: 'Default',
+        submoduleCfg: [],
+        userRemoteConfigs: [[
+        credentialsId: 'GitHub_christianlopez4',
+        url:'https://github.com/Christianlopez4/ADN-Ceiba'
+        ]]
+        ])
+      }
+    }
+
+    stage('Compile') {
+      steps{
+       echo "------------>Compile<------------"
+       sh 'gradle --b ./microservicio/build.gradle clean'
       }
     }
     
-    stage('Compile & Unit Tests') {
+    stage('Unit Tests') {
       steps{
-        echo "------------>Compile & Unit Tests<------------"
-
+        echo "------------>Unit Tests<------------"
+        sh 'gradle --b ./microservicio/build.gradle test'
       }
     }
 
