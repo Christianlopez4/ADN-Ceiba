@@ -1,10 +1,10 @@
-package com.ceiba.cita;
+package com.ceiba.cita.servicio;
 
 import com.ceiba.cita.excepcion.ExcepcionDiaInvalido;
 import com.ceiba.cita.excepcion.ExcepcionMultipleCitaElMismoDia;
 import com.ceiba.cita.modelo.entidad.Cita;
 import com.ceiba.cita.puerto.repositorio.RepositorioCita;
-import com.ceiba.cita.servicio.ServicioCrearCita;
+import com.ceiba.cita.servicio.testdatabuilder.CitaTestDataBuilder;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.jupiter.api.DisplayName;
@@ -15,7 +15,6 @@ import org.mockito.MockitoAnnotations;
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.time.LocalDate;
-import java.time.LocalTime;
 
 public class ServicioCrearCitaPrueba {
 
@@ -36,17 +35,10 @@ public class ServicioCrearCitaPrueba {
 
         Long valorEsperado = 1L;
 
-        Long id = 1L;
-        LocalDate fecha = LocalDate.of(2021, 7, 19);
-        LocalTime hora = LocalTime.of(14, 00, 00);
-        Double costo = 3000.0;
-        Long idPaciente = 123L;
-        String estado = "ACTIVA";
+        Cita cita = new CitaTestDataBuilder().conFecha(LocalDate.of(2021,7,19)).build();
 
-        Cita cita = new Cita(id, fecha, hora, costo, idPaciente, estado);
-
-        Mockito.when(repositorioCita.crear(cita)).thenReturn(id);
-        Mockito.when(repositorioCita.existeMultipleCita(idPaciente, fecha)).thenReturn(false);
+        Mockito.when(repositorioCita.crear(cita)).thenReturn(cita.getId());
+        Mockito.when(repositorioCita.existeMultipleCita(cita.getIdPaciente(), cita.getFecha())).thenReturn(false);
 
         Long valorActual = servicioCrearCita.ejecutar(cita);
 
@@ -56,14 +48,8 @@ public class ServicioCrearCitaPrueba {
     @Test
     @DisplayName("No es posible agregar cita los días sábados")
     public void testAgregarCita2() {
-        Long id = 1L;
-        LocalDate fecha = LocalDate.of(2021, 7, 17);
-        LocalTime hora = LocalTime.of(14, 00, 00);
-        Double costo = 3000.0;
-        Long idPaciente = 123L;
-        String estado = "ACTIVA";
 
-        Cita cita = new Cita(id, fecha, hora, costo, idPaciente, estado);
+        Cita cita = new CitaTestDataBuilder().conFecha(LocalDate.of(2021,7,17)).build();
 
         try {
             servicioCrearCita.ejecutar(cita);
@@ -76,14 +62,8 @@ public class ServicioCrearCitaPrueba {
     @Test
     @DisplayName("No es posible agregar cita los días domingos")
     public void testAgregarCita4() {
-        Long id = 1L;
-        LocalDate fecha = LocalDate.of(2021, 7, 18);
-        LocalTime hora = LocalTime.of(14, 00, 00);
-        Double costo = 3000.0;
-        Long idPaciente = 123L;
-        String estado = "ACTIVA";
 
-        Cita cita = new Cita(id, fecha, hora, costo, idPaciente, estado);
+        Cita cita = new CitaTestDataBuilder().conFecha(LocalDate.of(2021,7,18)).build();
 
         try {
             servicioCrearCita.ejecutar(cita);
@@ -98,17 +78,10 @@ public class ServicioCrearCitaPrueba {
     public void testAgregarCita5() {
         Double valorEsperado = 6000.0;
 
-        Long id = 1L;
-        LocalDate fecha = LocalDate.of(2021, 7, 20);
-        LocalTime hora = LocalTime.of(14, 00, 00);
-        Double costo = 3000.0;
-        Long idPaciente = 123L;
-        String estado = "ACTIVA";
+        Cita cita = new CitaTestDataBuilder().conFecha(LocalDate.of(2021,7,20)).build();
 
-        Cita cita = new Cita(id, fecha, hora, costo, idPaciente, estado);
-
-        Mockito.when(repositorioCita.crear(cita)).thenReturn(id);
-        Mockito.when(repositorioCita.existeMultipleCita(idPaciente, fecha)).thenReturn(false);
+        Mockito.when(repositorioCita.crear(cita)).thenReturn(cita.getId());
+        Mockito.when(repositorioCita.existeMultipleCita(cita.getIdPaciente(), cita.getFecha())).thenReturn(false);
 
         servicioCrearCita.ejecutar(cita);
 
@@ -120,14 +93,8 @@ public class ServicioCrearCitaPrueba {
     @Test
     @DisplayName("No es posible agregar cita por múltiple cita el mismo día")
     public void testAgregarCita6() {
-        Long id = 1L;
-        LocalDate fecha = LocalDate.of(2021, 7, 19);
-        LocalTime hora = LocalTime.of(14, 00, 00);
-        Double costo = 3000.0;
-        Long idPaciente = 123L;
-        String estado = "ACTIVA";
 
-        Cita cita = new Cita(id, fecha, hora, costo, idPaciente, estado);
+        Cita cita = new CitaTestDataBuilder().conFecha(LocalDate.of(2021,7,19)).build();
 
         Mockito.when(repositorioCita.existeMultipleCita(cita.getIdPaciente(), cita.getFecha())).thenReturn(true);
 
