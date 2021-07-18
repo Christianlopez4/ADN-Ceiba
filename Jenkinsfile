@@ -29,9 +29,7 @@ pipeline {
   stages{
     stage('Checkout') {
       steps{
-        echo "------------>Checkout<--------------"
-        sh 'chmod +x gradlew'
-        sh './gradlew --b ./build.gradle test'
+        echo "------------>Checkout<------------"
       }
     }
 
