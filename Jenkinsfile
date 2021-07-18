@@ -48,13 +48,14 @@ pipeline {
     stage('Compile') {
       steps{
        echo "------------>Compile<------------"
-       sh 'gradle --b ./microservicio/build.gradle clean'
+       sh 'gradle --b ./microservicio/build.gradle clean compileJava'
       }
     }
     
     stage('Unit Tests') {
       steps{
         echo "------------>Unit Tests<------------"
+        sh 'gradle --b ./microservicio/build.gradle clean'
         sh 'gradle --b ./microservicio/build.gradle test'
       }
     }
