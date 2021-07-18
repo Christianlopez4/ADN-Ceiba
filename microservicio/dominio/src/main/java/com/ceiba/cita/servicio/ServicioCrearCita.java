@@ -7,13 +7,15 @@ import com.ceiba.cita.puerto.repositorio.RepositorioCita;
 import com.ceiba.cita.utils.HolidayUtil;
 import com.ceiba.paciente.puerto.repositorio.RepositorioPaciente;
 
+import java.time.DayOfWeek;
+import java.time.LocalDate;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
 public class ServicioCrearCita {
 
-    private final static String MENSAJE_DIA_INVALIDO = "No es posible agendar citas los días sábados o domingos";
-    private final static String MENSAJE_MULTIPLE_CITA = "No es posible agendar más de una cita el mismo día";
+    public final static String MENSAJE_DIA_INVALIDO = "No es posible agendar citas los días sábados o domingos";
+    public final static String MENSAJE_MULTIPLE_CITA = "No es posible agendar más de una cita el mismo día";
 
     private RepositorioCita repositorioCita;
 
@@ -21,7 +23,7 @@ public class ServicioCrearCita {
 
     public ServicioCrearCita(RepositorioCita repositorioCita) {
         this.repositorioCita = repositorioCita;
-        this.holidayUtil = new HolidayUtil(2021);
+        this.holidayUtil = new HolidayUtil(LocalDate.now().getYear());
     }
 
     public Long ejecutar(Cita cita) {
@@ -32,30 +34,28 @@ public class ServicioCrearCita {
     }
 
     private void validarDia(Cita cita) {
-        GregorianCalendar g = new GregorianCalendar();
-        g.setTime(cita.getFecha());
+        DayOfWeek diaSemana =  cita.getFecha().getDayOfWeek();
 
-        int diaSemana = g.get(Calendar.DAY_OF_WEEK);
-
-        if (diaSemana == 1 || diaSemana == 7) {
-            throw new ExcepcionDiaInvalido("MENSAJE_DIA_INVALIDO");
+        if (diaSemana.equals(DayOfWeek.SATURDAY) || diaSemana.equals(DayOfWeek.SUNDAY)) {
+            throw new ExcepcionDiaInvalido(MENSAJE_DIA_INVALIDO);
         }
-
     }
 
     private void validarFestivo(Cita cita) {
-        Integer dia = cita.getFecha().getDay();
-        Integer mes = cita.getFecha().getMonth();
-        Boolean festivo = this.holidayUtil.isHoliday(mes, dia);
-        if (festivo) {
+        LocalDate fecha = cita.getFecha();
+        int dia = fecha.getDayOfMonth();
+        int mes = fecha.getMonthValue();
+        Boolean esFestivo = this.holidayUtil.isHoliday(mes, dia);
+
+        if (esFestivo) {
             cita.setCosto(cita.getCosto() * 2);
         }
     }
 
     private void validarMultipleCitaElMismoDia(Cita cita) throws ExcepcionMultipleCitaElMismoDia {
-        boolean existe = this.repositorioCita.existeMultipleCita(cita.getIdPaciente(), cita.getFecha());
-        if (existe) {
-            throw new ExcepcionMultipleCitaElMismoDia("MENSAJE_MULTIPLE_CITA");
+        boolean esMultiple = this.repositorioCita.existeMultipleCita(cita.getIdPaciente(), cita.getFecha());
+        if (esMultiple) {
+            throw new ExcepcionMultipleCitaElMismoDia(MENSAJE_MULTIPLE_CITA);
         }
     }
 }
