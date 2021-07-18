@@ -8,6 +8,7 @@ import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.stereotype.Repository;
 
 import java.sql.Date;
+import java.time.LocalDate;
 
 @Repository
 public class RepositorioCitaMysql implements RepositorioCita {
@@ -38,7 +39,7 @@ public class RepositorioCitaMysql implements RepositorioCita {
     }
 
     @Override
-    public Boolean existeMultipleCita(Long idPaciente, Date fecha) {
+    public Boolean existeMultipleCita(Long idPaciente, LocalDate fecha) {
         MapSqlParameterSource paramSource = new MapSqlParameterSource();
         paramSource.addValue("idPaciente", idPaciente);
         paramSource.addValue("fecha", fecha);

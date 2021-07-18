@@ -7,6 +7,8 @@ import com.ceiba.cita.comando.manejador.ManejadorCrearCita;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
+
 @RestController
 @RequestMapping("citas")
 public class ComandoControladorCita {

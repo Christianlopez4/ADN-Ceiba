@@ -27,19 +27,19 @@ public class HolidayUtil {
         this.easterMonth = (h - m + r + 90) / 25;
         this.easterDay = (h - m + r + this.easterMonth + 19) % 32;
         this.easterMonth--;
-        this.holidays.add("0:1");               // Primero de Enero
-        this.holidays.add("4:1");               // Dia del trabajo 1 de mayo
-        this.holidays.add("6:20");              //Independencia 20 de Julio
-        this.holidays.add("7:7");               //Batalla de boyaca 7 de agosto
-        this.holidays.add("11:8");              //Maria inmaculada 8 de diciembre
-        this.holidays.add("11:25");             //Navidad 25 de diciembre
-        this.calculateEmiliani(0, 6);           // Reyes magos 6 de enero
-        this.calculateEmiliani(2, 19);          //San jose 19 de marzo
-        this.calculateEmiliani(5, 29);          //San pedro y san pablo 29 de junio
-        this.calculateEmiliani(7, 15);          //Asuncion 15 de agosto
-        this.calculateEmiliani(9, 12);          //Descubrimiento de america 12 de octubre
-        this.calculateEmiliani(10, 1);          //Todos los santos 1 de noviembre
-        this.calculateEmiliani(10, 11);         //Independencia de cartagena 11 de noviembre
+        this.holidays.add("1:1");               // Primero de Enero
+        this.holidays.add("5:1");               // Dia del trabajo 1 de mayo
+        this.holidays.add("7:20");              //Independencia 20 de Julio
+        this.holidays.add("8:7");               //Batalla de boyaca 7 de agosto
+        this.holidays.add("12:8");              //Maria inmaculada 8 de diciembre
+        this.holidays.add("12:25");             //Navidad 25 de diciembre
+        this.calculateEmiliani(1, 6);           // Reyes magos 6 de enero
+        this.calculateEmiliani(3, 19);          //San jose 19 de marzo
+        this.calculateEmiliani(6, 29);          //San pedro y san pablo 29 de junio
+        this.calculateEmiliani(8, 15);          //Asuncion 15 de agosto
+        this.calculateEmiliani(10, 12);          //Descubrimiento de america 12 de octubre
+        this.calculateEmiliani(11, 1);          //Todos los santos 1 de noviembre
+        this.calculateEmiliani(11, 11);         //Independencia de cartagena 11 de noviembre
         this.calculateOtherHoliday(-3, false);  //jueves santos
         this.calculateOtherHoliday(-2, false);  //viernes santo
         this.calculateOtherHoliday(40, true);   //Asención del señor de pascua

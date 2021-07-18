@@ -2,7 +2,7 @@ package com.ceiba.cita.puerto.repositorio;
 
 import com.ceiba.cita.modelo.entidad.Cita;
 
-import java.sql.Date;
+import java.time.LocalDate;
 
 public interface RepositorioCita {
 
@@ -10,5 +10,5 @@ public interface RepositorioCita {
 
     void actualizar(Cita cita);
 
-    Boolean existeMultipleCita(Long idPaciente, Date fecha);
+    Boolean existeMultipleCita(Long idPaciente, LocalDate fecha);
 }
