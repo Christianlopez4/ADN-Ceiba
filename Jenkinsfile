@@ -71,6 +71,7 @@ sh "${tool name: 'SonarScanner', type:'hudson.plugins.sonar.SonarRunnerInstallat
     stage('Build') {
       steps {
         echo "------------>Build<------------"
+        sh './gradlew --b ./microservicio/build.gradle build -x test'
       }
     }  
   }
@@ -81,9 +82,11 @@ sh "${tool name: 'SonarScanner', type:'hudson.plugins.sonar.SonarRunnerInstallat
     }
     success {
       echo 'This will run only if successful'
+      junit '**/build/test-results/test/*.xml'
     }
     failure {
       echo 'This will run only if failed'
+      mail (to: 'christian.lopez@ceiba.com.co',subject: "Failed Pipeline:${currentBuild.fullDisplayName}",body: "Something is wrong with ${env.BUILD_URL}")
     }
     unstable {
       echo 'This will run only if the run was marked as unstable'
