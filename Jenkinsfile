@@ -38,7 +38,7 @@ pipeline {
           gitTool: 'Default', 
           submoduleCfg: [], 
           userRemoteConfigs: [[
-          credentialsId: 'GitHub_christianlopez4
+          credentialsId: 'GitHub_christianlopez4',
           url:'https://github.com/Christianlopez4/ADN-Ceiba'
           ]]
           ])
