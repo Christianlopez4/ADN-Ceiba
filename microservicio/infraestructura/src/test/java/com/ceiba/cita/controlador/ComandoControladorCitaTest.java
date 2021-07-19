@@ -3,8 +3,6 @@ package com.ceiba.cita.controlador;
 import com.ceiba.ApplicationMock;
 import com.ceiba.cita.comando.ComandoCita;
 import com.ceiba.cita.servicio.testdatabuilder.ComandoCitaTestDataBuilder;
-import com.ceiba.usuario.controlador.ComandoControladorUsuario;
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -33,19 +31,17 @@ public class ComandoControladorCitaTest {
     @Test
     public void crear() throws Exception {
         ComandoCita comandoCita = new ComandoCitaTestDataBuilder().build();
-
         mocMvc.perform(post("/citas")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(objectMapper.writeValueAsString(comandoCita)))
                 .andExpect(status().isOk())
                 .andExpect(content().json("{'valor': 2}"));
-
     }
 
     @Test
     public void actualizar() throws Exception {
         Long id = 1L;
-        ComandoCita comandoCita = new ComandoCitaTestDataBuilder().build();
+        ComandoCita comandoCita = new ComandoCitaTestDataBuilder().conIdPaciente(id).build();
 
         mocMvc.perform(put("/citas/{id}", id)
                 .contentType(MediaType.APPLICATION_JSON)
