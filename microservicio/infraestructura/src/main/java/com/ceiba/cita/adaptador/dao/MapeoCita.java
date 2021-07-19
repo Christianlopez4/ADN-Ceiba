@@ -8,13 +8,17 @@ import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Time;
+import java.time.Instant;
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.ZoneId;
 
 public class MapeoCita implements RowMapper<DtoCita>, MapperResult {
     @Override
     public DtoCita mapRow(ResultSet rs, int rowNum) throws SQLException {
-        Long id = rs.getLong("id");
-        Date fecha = rs.getDate("fecha");
-        Time hora = rs.getTime("hora");
+        Integer id = rs.getInt("id");
+        LocalDate fecha = rs.getDate("fecha").toLocalDate();
+        LocalTime hora = rs.getTime("hora").toLocalTime();
         Double costo = rs.getDouble("costo");
         Long idPaciente = rs.getLong("id_paciente");
         String estado = rs.getString("estado");
