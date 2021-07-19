@@ -1,10 +1,14 @@
 package com.ceiba.cita.servicio;
 
+import com.ceiba.categoria.modelo.dto.DtoCategoria;
+import com.ceiba.categoria.puerto.dao.DaoCategoria;
 import com.ceiba.cita.excepcion.ExcepcionDiaInvalido;
 import com.ceiba.cita.excepcion.ExcepcionMultipleCitaElMismoDia;
 import com.ceiba.cita.modelo.entidad.Cita;
 import com.ceiba.cita.puerto.repositorio.RepositorioCita;
 import com.ceiba.cita.utils.HolidayUtil;
+import com.ceiba.paciente.modelo.dto.DtoPaciente;
+import com.ceiba.paciente.puerto.dao.DaoPaciente;
 import com.ceiba.paciente.puerto.repositorio.RepositorioPaciente;
 
 import java.time.DayOfWeek;
@@ -20,12 +24,19 @@ public class ServicioCrearCita {
 
     private HolidayUtil holidayUtil;
 
-    public ServicioCrearCita(RepositorioCita repositorioCita) {
+    private DaoPaciente daoPaciente;
+
+    private DaoCategoria daoCategoria;
+
+    public ServicioCrearCita(RepositorioCita repositorioCita, DaoPaciente daoPaciente, DaoCategoria daoCategoria) {
         this.repositorioCita = repositorioCita;
+        this.daoPaciente = daoPaciente;
+        this.daoCategoria = daoCategoria;
         this.holidayUtil = new HolidayUtil(LocalDate.now().getYear());
     }
 
     public Long ejecutar(Cita cita) {
+        calcularCosto(cita);
         validarFestivo(cita);
         validarMultipleCitaElMismoDia(cita);
         return this.repositorioCita.crear(cita);
@@ -47,5 +58,16 @@ public class ServicioCrearCita {
         if (esMultiple) {
             throw new ExcepcionMultipleCitaElMismoDia(MENSAJE_MULTIPLE_CITA);
         }
+    }
+
+    public void calcularCosto(Cita cita) {
+        Long idPaciente = cita.getIdPaciente();
+        DtoPaciente dtoPaciente = this.daoPaciente.buscar(idPaciente);
+
+        Integer idCategoria = dtoPaciente.getIdCategoria();
+        DtoCategoria dtoCategoria = this.daoCategoria.buscar(idCategoria);
+
+        cita.setCosto(dtoCategoria.getCuotaModeradora());
+
     }
 }
