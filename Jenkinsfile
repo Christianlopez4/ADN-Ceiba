@@ -30,6 +30,18 @@ pipeline {
     stage('Checkout') {
       steps{
         echo "------------>Checkout<------------"
+        checkout([
+          $class: 'GitSCM', 
+          branches: [[name: '*/main, 
+          doGenerateSubmoduleConfigurations: false, 
+          extensions: [], 
+          gitTool: 'Default', 
+          submoduleCfg: [], 
+          userRemoteConfigs: [[
+          credentialsId: 'GitHub_christianlopez4
+          url:'https://github.com/Christianlopez4/ADN-Ceiba'
+          ]]
+          ])
       }
     }
     
