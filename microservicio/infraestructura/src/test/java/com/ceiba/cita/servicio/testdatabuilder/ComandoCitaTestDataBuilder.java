@@ -7,7 +7,7 @@ import java.time.LocalTime;
 
 public class ComandoCitaTestDataBuilder {
 
-    private Long id;
+    private Integer id;
     private LocalDate fecha;
     private LocalTime hora;
     private Double costo;
@@ -15,7 +15,7 @@ public class ComandoCitaTestDataBuilder {
     private String estado;
 
     public ComandoCitaTestDataBuilder() {
-        this.id = 1L;
+        this.id = 1;
         this.fecha = LocalDate.of(2021,7,29);
         this.hora = LocalTime.of(14,0,0);
         this.costo = 3000.0;

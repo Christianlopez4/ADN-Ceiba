@@ -14,7 +14,7 @@ import java.time.LocalTime;
 @NoArgsConstructor
 public class ComandoCita {
 
-    private Long id;
+    private Integer id;
     private LocalDate fecha;
     private LocalTime hora;
     private Double costo;
