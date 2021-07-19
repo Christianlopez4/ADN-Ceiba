@@ -31,31 +31,27 @@ pipeline {
       steps{
         echo "------------>Checkout<------------"
         checkout([
-          $class: 'GitSCM', 
-          branches: [[name: '*/main, 
-          doGenerateSubmoduleConfigurations: false, 
-          extensions: [], 
-          gitTool: 'Default', 
-          submoduleCfg: [], 
-          userRemoteConfigs: [[
-          credentialsId: 'GitHub_christianlopez4',
-          url:'https://github.com/Christianlopez4/ADN-Ceiba'
+        $class: 'GitSCM', 
+        branches: [[name: '*/master']], 
+        doGenerateSubmoduleConfigurations: false, 
+        extensions: [], 
+        gitTool: 'Default', 
+        submoduleCfg: [], 
+        userRemoteConfigs: [[
+            credentialsId: 'GitHub_christianlopez4', 
+            url:'https://github.com/Christianlopez4/ADN-Ceiba'
           ]]
-          ])
-      }
-    }
-    
-    stage('Compile') {
-      steps{
-        echo "------------>Compile<------------"
-        sh 'gradle --b ./microservicio/build.gradle clean'
+        ])
+
       }
     }
     
     stage('Compile & Unit Tests') {
       steps{
         echo "------------>Compile & Unit Tests<------------"
-        sh 'gradle --b ./microservicio/build.gradle test'
+        sh 'chmod +x ./gradlew'
+        sh './gradlew --b ./microservicio/build.gradle clean'
+        sh './gradlew --b ./microservicio/build.gradle test'
       }
     }
 
@@ -71,7 +67,7 @@ sh "${tool name: 'SonarScanner', type:'hudson.plugins.sonar.SonarRunnerInstallat
     stage('Build') {
       steps {
         echo "------------>Build<------------"
-        sh 'gradle --b ./microservicio/build.gradle build -x test'
+        sh './gradlew --b ./microservicio/build.gradle build -x test'
       }
     }  
   }
