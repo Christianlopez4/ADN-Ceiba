@@ -12,7 +12,7 @@ pipeline {
 
   //Una sección que define las herramientas “preinstaladas” en Jenkins
   tools {
-    jdk 'JDK8_Centos' //Verisión preinstalada en la Configuración del Master
+    jdk 'JDK11_Centos' //Verisión preinstalada en la Configuración del Master
   }
 /*	Versiones disponibles
       JDK8_Mac
@@ -50,8 +50,8 @@ pipeline {
       steps{
         echo "------------>Compile & Unit Tests<------------"
         sh 'chmod +x ./gradlew'
-        sh './gradlew --b ./microservicio/build.gradle clean'
-        sh './gradlew --b ./microservicio/build.gradle test'
+        sh './microservicio/gradlew --b ./microservicio/build.gradle clean'
+        sh './microservicio/gradlew --b ./microservicio/build.gradle test'
       }
     }
 
@@ -67,7 +67,7 @@ sh "${tool name: 'SonarScanner', type:'hudson.plugins.sonar.SonarRunnerInstallat
     stage('Build') {
       steps {
         echo "------------>Build<------------"
-        sh './gradlew --b ./microservicio/build.gradle build -x test'
+        sh './microservicio/gradlew --b ./microservicio/build.gradle build -x test'
       }
     }  
   }
