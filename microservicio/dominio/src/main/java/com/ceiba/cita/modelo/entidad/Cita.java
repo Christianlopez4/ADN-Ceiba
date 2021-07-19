@@ -23,6 +23,7 @@ public class Cita {
     private String estado;
 
     public Cita(Long id, LocalDate fecha, LocalTime hora, Double costo, Long idPaciente, String estado) {
+        validarDia(fecha);
         this.id = id;
         this.fecha = fecha;
         this.hora = hora;

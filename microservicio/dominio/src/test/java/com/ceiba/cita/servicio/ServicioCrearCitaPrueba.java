@@ -1,5 +1,6 @@
 package com.ceiba.cita.servicio;
 
+import com.ceiba.BasePrueba;
 import com.ceiba.categoria.modelo.dto.DtoCategoria;
 import com.ceiba.categoria.puerto.dao.DaoCategoria;
 import com.ceiba.cita.excepcion.ExcepcionDiaInvalido;
@@ -69,34 +70,27 @@ public class ServicioCrearCitaPrueba {
     @DisplayName("No es posible agregar cita los días sábados")
     public void testAgregarCita2() {
 
-        Cita cita = new CitaTestDataBuilder().conFecha(LocalDate.of(2021,7,17)).build();
-
-        DtoPaciente dtoPaciente = new PacienteTestDataBuilder().build();
-
-        DtoCategoria dtoCategoria = new CategoriaTestDataBuilder().build();
-
-        Mockito.when(daoPaciente.buscar(cita.getIdPaciente())).thenReturn(dtoPaciente);
-        Mockito.when(daoCategoria.buscar(dtoPaciente.getIdCategoria())).thenReturn(dtoCategoria);
-        Mockito.when(repositorioCita.existeMultipleCita(cita.getIdPaciente(), cita.getFecha())).thenReturn(false);
+        CitaTestDataBuilder citaTestDataBuilder = new CitaTestDataBuilder().conFecha(LocalDate.of(2021,7,17));
 
         try {
-            servicioCrearCita.ejecutar(cita);
+            citaTestDataBuilder.build();
             fail();
         } catch (ExcepcionDiaInvalido e) {
             assertEquals(Cita.MENSAJE_DIA_INVALIDO, e.getMessage());
         }
+
     }
 
-    /*
+
     @Test
     @Disabled
     @DisplayName("No es posible agregar cita los días domingos")
     public void testAgregarCita3() {
 
-        Cita cita = new CitaTestDataBuilder().conFecha(LocalDate.of(2021,7,18)).build();
+        CitaTestDataBuilder citaTestDataBuilder = new CitaTestDataBuilder().conFecha(LocalDate.of(2021,7,18));
 
         try {
-            servicioCrearCita.ejecutar(cita);
+            citaTestDataBuilder.build();
             fail();
         } catch (ExcepcionDiaInvalido e) {
             assertEquals(Cita.MENSAJE_DIA_INVALIDO, e.getMessage());
@@ -111,8 +105,14 @@ public class ServicioCrearCitaPrueba {
 
         Cita cita = new CitaTestDataBuilder().conFecha(LocalDate.of(2021,7,20)).build();
 
-        Mockito.when(repositorioCita.crear(cita)).thenReturn(cita.getId());
+        DtoPaciente dtoPaciente = new PacienteTestDataBuilder().build();
+
+        DtoCategoria dtoCategoria = new CategoriaTestDataBuilder().build();
+
+        Mockito.when(daoPaciente.buscar(cita.getIdPaciente())).thenReturn(dtoPaciente);
+        Mockito.when(daoCategoria.buscar(dtoPaciente.getIdCategoria())).thenReturn(dtoCategoria);
         Mockito.when(repositorioCita.existeMultipleCita(cita.getIdPaciente(), cita.getFecha())).thenReturn(false);
+        Mockito.when(repositorioCita.crear(cita)).thenReturn(cita.getId());
 
         servicioCrearCita.ejecutar(cita);
 
@@ -128,6 +128,12 @@ public class ServicioCrearCitaPrueba {
 
         Cita cita = new CitaTestDataBuilder().conFecha(LocalDate.of(2021,7,19)).build();
 
+        DtoPaciente dtoPaciente = new PacienteTestDataBuilder().build();
+
+        DtoCategoria dtoCategoria = new CategoriaTestDataBuilder().build();
+
+        Mockito.when(daoPaciente.buscar(cita.getIdPaciente())).thenReturn(dtoPaciente);
+        Mockito.when(daoCategoria.buscar(dtoPaciente.getIdCategoria())).thenReturn(dtoCategoria);
         Mockito.when(repositorioCita.existeMultipleCita(cita.getIdPaciente(), cita.getFecha())).thenReturn(true);
 
         try {
@@ -139,7 +145,7 @@ public class ServicioCrearCitaPrueba {
     }
 
 
-     */
+
 }
 
 
