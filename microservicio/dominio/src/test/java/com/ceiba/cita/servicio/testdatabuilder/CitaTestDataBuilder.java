@@ -1,5 +1,6 @@
 package com.ceiba.cita.servicio.testdatabuilder;
 
+import com.ceiba.cita.modelo.dto.DtoCita;
 import com.ceiba.cita.modelo.entidad.Cita;
 
 import java.time.LocalDate;
@@ -27,7 +28,16 @@ public class CitaTestDataBuilder {
         return this;
     }
 
+    public CitaTestDataBuilder conEstado(String estado) {
+        this.estado = estado;
+        return this;
+    }
+
     public Cita build() {
         return new Cita(id, fecha, hora, costo, idPaciente, estado);
+    }
+
+    public DtoCita buildDto() {
+        return new DtoCita(id, fecha, hora, costo, idPaciente, estado);
     }
 }

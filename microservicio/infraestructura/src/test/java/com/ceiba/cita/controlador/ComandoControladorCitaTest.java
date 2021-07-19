@@ -43,7 +43,7 @@ public class ComandoControladorCitaTest {
         Long id = 1L;
         ComandoCita comandoCita = new ComandoCitaTestDataBuilder().conIdPaciente(id).build();
 
-        mocMvc.perform(put("/citas/{id}", id)
+        mocMvc.perform(put("/citas/{id}", comandoCita.getId())
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(objectMapper.writeValueAsString(comandoCita)))
                 .andExpect(status().isOk());

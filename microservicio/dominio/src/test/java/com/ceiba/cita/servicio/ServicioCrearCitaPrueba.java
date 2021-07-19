@@ -58,7 +58,7 @@ public class ServicioCrearCitaPrueba {
         Mockito.when(daoPaciente.buscar(cita.getIdPaciente())).thenReturn(dtoPaciente);
         Mockito.when(daoCategoria.buscar(dtoPaciente.getIdCategoria())).thenReturn(dtoCategoria);
         Mockito.when(repositorioCita.existeMultipleCita(cita.getIdPaciente(), cita.getFecha())).thenReturn(false);
-        Mockito.when(repositorioCita.crear(cita)).thenReturn(cita.getId());
+        Mockito.when(repositorioCita.crear(cita)).thenReturn(1L);
 
         Long valorActual = servicioCrearCita.ejecutar(cita);
 
@@ -66,7 +66,6 @@ public class ServicioCrearCitaPrueba {
     }
 
     @Test
-    @Disabled
     @DisplayName("No es posible agregar cita los días sábados")
     public void testAgregarCita2() {
 
@@ -83,7 +82,6 @@ public class ServicioCrearCitaPrueba {
 
 
     @Test
-    @Disabled
     @DisplayName("No es posible agregar cita los días domingos")
     public void testAgregarCita3() {
 
@@ -98,7 +96,6 @@ public class ServicioCrearCitaPrueba {
     }
 
     @Test
-    @Disabled
     @DisplayName("Agregar cita con sobrecosto")
     public void testAgregarCita4() {
         Double valorEsperado = 6000.0;
@@ -112,7 +109,7 @@ public class ServicioCrearCitaPrueba {
         Mockito.when(daoPaciente.buscar(cita.getIdPaciente())).thenReturn(dtoPaciente);
         Mockito.when(daoCategoria.buscar(dtoPaciente.getIdCategoria())).thenReturn(dtoCategoria);
         Mockito.when(repositorioCita.existeMultipleCita(cita.getIdPaciente(), cita.getFecha())).thenReturn(false);
-        Mockito.when(repositorioCita.crear(cita)).thenReturn(cita.getId());
+        Mockito.when(repositorioCita.crear(cita)).thenReturn(1L);
 
         servicioCrearCita.ejecutar(cita);
 
@@ -122,7 +119,6 @@ public class ServicioCrearCitaPrueba {
     }
 
     @Test
-    @Disabled
     @DisplayName("No es posible agregar cita por múltiple cita el mismo día")
     public void testAgregarCita5() {
 
@@ -143,8 +139,6 @@ public class ServicioCrearCitaPrueba {
             assertEquals(ServicioCrearCita.MENSAJE_MULTIPLE_CITA, e.getMessage());
         }
     }
-
-
 
 }
 
