@@ -25,7 +25,7 @@ public class ComandoControladorCita {
     }
 
     @PutMapping(value="/{id}")
-    public void actualizar(@RequestBody ComandoCita comandoCita, @PathVariable Long id) {
+    public void actualizar(@RequestBody ComandoCita comandoCita, @PathVariable Integer id) {
         comandoCita.setId(id);
         manejadorActualizarCita.ejecutar(comandoCita);
     }

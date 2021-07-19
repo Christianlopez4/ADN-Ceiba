@@ -7,7 +7,7 @@ import java.time.LocalTime;
 
 public class CitaTestDataBuilder {
 
-    private Long id;
+    private Integer id;
     private LocalDate fecha;
     private LocalTime hora;
     private Double costo;
@@ -15,7 +15,7 @@ public class CitaTestDataBuilder {
     private String estado;
 
     public CitaTestDataBuilder() {
-        this.id = 1L;
+        this.id = 1;
         this.hora = LocalTime.of(14, 00, 00);
         this.costo = 3000.0;
         this.idPaciente = 123L;

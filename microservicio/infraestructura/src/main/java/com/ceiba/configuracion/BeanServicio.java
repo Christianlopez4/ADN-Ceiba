@@ -1,6 +1,7 @@
 package com.ceiba.configuracion;
 
 import com.ceiba.categoria.puerto.dao.DaoCategoria;
+import com.ceiba.cita.puerto.dao.DaoCita;
 import com.ceiba.cita.puerto.repositorio.RepositorioCita;
 import com.ceiba.cita.servicio.ServicioActualizarCita;
 import com.ceiba.cita.servicio.ServicioCrearCita;
@@ -43,7 +44,7 @@ public class BeanServicio {
     }
 
     @Bean
-    public ServicioActualizarCita servicioActualizarCita(RepositorioCita repositorioCita) {
-        return new ServicioActualizarCita(repositorioCita);
+    public ServicioActualizarCita servicioActualizarCita(RepositorioCita repositorioCita, DaoPaciente daoPaciente, DaoCategoria daoCategoria, DaoCita daoCita) {
+        return new ServicioActualizarCita(repositorioCita, daoPaciente, daoCategoria, daoCita);
     }
 }

@@ -15,14 +15,14 @@ public class Cita {
 
     public final static String MENSAJE_DIA_INVALIDO = "No es posible agendar citas los días sábados o domingos";
 
-    private Long id;
+    private Integer id;
     private LocalDate fecha;
     private LocalTime hora;
     private Double costo;
     private Long idPaciente;
     private String estado;
 
-    public Cita(Long id, LocalDate fecha, LocalTime hora, Double costo, Long idPaciente, String estado) {
+    public Cita(Integer id, LocalDate fecha, LocalTime hora, Double costo, Long idPaciente, String estado) {
         validarDia(fecha);
         this.id = id;
         this.fecha = fecha;
@@ -38,5 +38,9 @@ public class Cita {
         if (diaSemana.equals(DayOfWeek.SATURDAY) || diaSemana.equals(DayOfWeek.SUNDAY)) {
             throw new ExcepcionDiaInvalido(MENSAJE_DIA_INVALIDO);
         }
+    }
+
+    public boolean esCancelacion() {
+        return estado.equals("CANCELADA");
     }
 }
