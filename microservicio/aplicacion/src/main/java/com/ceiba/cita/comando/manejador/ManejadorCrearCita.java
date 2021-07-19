@@ -19,12 +19,6 @@ public class ManejadorCrearCita implements ManejadorComandoRespuesta<ComandoCita
     private FabricaCita fabricaCita;
     private ServicioCrearCita servicioCrearCita;
 
-    @Autowired
-    private DaoPaciente daoPaciente;
-
-    @Autowired
-    private DaoCategoria daoCategoria;
-
     public ManejadorCrearCita(FabricaCita fabricaCita, ServicioCrearCita servicioCrearCita) {
         this.fabricaCita = fabricaCita;
         this.servicioCrearCita = servicioCrearCita;
@@ -32,14 +26,6 @@ public class ManejadorCrearCita implements ManejadorComandoRespuesta<ComandoCita
 
     @Override
     public ComandoRespuesta<Long> ejecutar(ComandoCita comando) {
-        Long idPaciente = comando.getIdPaciente();
-        DtoPaciente dtoPaciente = this.daoPaciente.buscar(idPaciente);
-
-        Integer idCategoria = dtoPaciente.getIdCategoria();
-        DtoCategoria dtoCategoria = this.daoCategoria.buscar(idCategoria);
-
-        comando.setCosto(dtoCategoria.getCuotaModeradora());
-
         Cita cita = this.fabricaCita.crear(comando);
         return new ComandoRespuesta<>(this.servicioCrearCita.ejecutar(cita));
     }
