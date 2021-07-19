@@ -57,7 +57,7 @@ public class ServicioCrearCitaPrueba {
             servicioCrearCita.ejecutar(cita);
             fail();
         } catch (ExcepcionDiaInvalido e) {
-            assertEquals(ServicioCrearCita.MENSAJE_DIA_INVALIDO, e.getMessage());
+            assertEquals(Cita.MENSAJE_DIA_INVALIDO, e.getMessage());
         }
     }
 
@@ -71,7 +71,7 @@ public class ServicioCrearCitaPrueba {
             servicioCrearCita.ejecutar(cita);
             fail();
         } catch (ExcepcionDiaInvalido e) {
-            assertEquals(ServicioCrearCita.MENSAJE_DIA_INVALIDO, e.getMessage());
+            assertEquals(Cita.MENSAJE_DIA_INVALIDO, e.getMessage());
         }
     }
 

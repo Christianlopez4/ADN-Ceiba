@@ -14,7 +14,6 @@ import java.util.GregorianCalendar;
 
 public class ServicioCrearCita {
 
-    public final static String MENSAJE_DIA_INVALIDO = "No es posible agendar citas los días sábados o domingos";
     public final static String MENSAJE_MULTIPLE_CITA = "No es posible agendar más de una cita el mismo día";
 
     private RepositorioCita repositorioCita;
@@ -27,18 +26,9 @@ public class ServicioCrearCita {
     }
 
     public Long ejecutar(Cita cita) {
-        validarDia(cita);
         validarFestivo(cita);
         validarMultipleCitaElMismoDia(cita);
         return this.repositorioCita.crear(cita);
-    }
-
-    private void validarDia(Cita cita) {
-        DayOfWeek diaSemana =  cita.getFecha().getDayOfWeek();
-
-        if (diaSemana.equals(DayOfWeek.SATURDAY) || diaSemana.equals(DayOfWeek.SUNDAY)) {
-            throw new ExcepcionDiaInvalido(MENSAJE_DIA_INVALIDO);
-        }
     }
 
     private void validarFestivo(Cita cita) {
