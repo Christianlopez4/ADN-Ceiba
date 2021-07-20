@@ -50,7 +50,7 @@ public class ServicioActualizarCita {
     public void validarCostoCancelacion(Cita cita) {
         Double costoCancelacion;
         DtoCita dtoCita = this.daoCita.buscar(cita.getId());
-        if (LocalDate.now().equals(dtoCita.getFecha())) {
+        if (cita.getFecha().compareTo(dtoCita.getFecha()) == 0) {
             Long idPaciente = cita.getIdPaciente();
             DtoPaciente dtoPaciente = this.daoPaciente.buscar(idPaciente);
 

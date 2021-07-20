@@ -1,7 +1,6 @@
 package com.ceiba.cita.servicio.testdatabuilder;
 
 import com.ceiba.paciente.modelo.dto.DtoPaciente;
-
 import java.time.LocalDate;
 
 public class DtoPacienteTestDataBuilder {
