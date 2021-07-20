@@ -19,7 +19,7 @@ public class ComandoCitaTestDataBuilder {
         this.fecha = LocalDate.of(2021,7,29);
         this.hora = LocalTime.of(14,0,0);
         this.costo = 3000.0;
-        this.idPaciente = 2L;
+        this.idPaciente = 1L;
         this.estado = "ACTIVA";
     }
 
@@ -28,6 +28,10 @@ public class ComandoCitaTestDataBuilder {
         return this;
     }
 
+    public ComandoCitaTestDataBuilder conId(Integer id) {
+        this.id = id;
+        return this;
+    }
 
     public ComandoCita build() {
         return new ComandoCita(id, fecha, hora, costo, idPaciente, estado);

@@ -25,19 +25,15 @@ public class ConsultaControladorCitaTest {
 
     @Test
     public void listar() throws Exception {
-        /*
         mocMvc.perform(get("/citas")
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$", hasSize(1)));
-
-         */
+                .andExpect(jsonPath("$", hasSize(2)));
     }
 
     @Test
     public void buscar() throws Exception {
-        Long id = 1L;
-        mocMvc.perform(get("/citas/{id}", id)
+        mocMvc.perform(get("/citas/{id}", 1)
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk());
     }
