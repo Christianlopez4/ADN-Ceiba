@@ -3,6 +3,7 @@ package com.ceiba.paciente.modelo.entidad;
 import lombok.Getter;
 
 import java.sql.Date;
+import java.time.LocalDate;
 
 @Getter
 public class Paciente {
@@ -10,13 +11,13 @@ public class Paciente {
     private Long id;
     private String nombre;
     private String apellidos;
-    private Date fechaNacimiento;
+    private LocalDate fechaNacimiento;
     private String correoElectronico;
     private Long telefono;
     private Integer idCategoria;
     private Integer idDocumento;
 
-    public Paciente(Long id, String nombre, String apellidos, Date fechaNacimiento, String correoElectronico, Long telefono, Integer idCategoria, Integer idDocumento) {
+    public Paciente(Long id, String nombre, String apellidos, LocalDate fechaNacimiento, String correoElectronico, Long telefono, Integer idCategoria, Integer idDocumento) {
         this.id = id;
         this.nombre = nombre;
         this.apellidos = apellidos;
