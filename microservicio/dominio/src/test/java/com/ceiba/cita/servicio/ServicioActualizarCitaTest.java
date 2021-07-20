@@ -101,9 +101,9 @@ public class ServicioActualizarCitaTest {
     public void testActualizarCita4() {
         Double valorEsperado = 5000.0;
 
-        Cita cita = new CitaTestDataBuilder().conFecha(LocalDate.of(2021,7,19)).conEstado("CANCELADA").build();
+        Cita cita = new CitaTestDataBuilder().conId(2).conFecha(LocalDate.of(2021,7,19)).conEstado("CANCELADA").build();
 
-        DtoCita dtoCita = new CitaTestDataBuilder().conFecha(LocalDate.of(2021,7,19)).conEstado("CANCELADA").buildDto();
+        DtoCita dtoCita = new CitaTestDataBuilder().conId(2).conFecha(LocalDate.of(2021,7,19)).conEstado("CANCELADA").buildDto();
 
         DtoPaciente dtoPaciente = new PacienteTestDataBuilder().build();
 

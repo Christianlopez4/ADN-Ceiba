@@ -33,6 +33,11 @@ public class CitaTestDataBuilder {
         return this;
     }
 
+    public CitaTestDataBuilder conId(Integer id) {
+        this.id = id;
+        return this;
+    }
+
     public Cita build() {
         return new Cita(id, fecha, hora, costo, idPaciente, estado);
     }
