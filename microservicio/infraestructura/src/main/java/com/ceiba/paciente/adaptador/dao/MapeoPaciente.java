@@ -7,6 +7,7 @@ import org.springframework.jdbc.core.RowMapper;
 import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
 
 public class MapeoPaciente implements RowMapper<DtoPaciente>, MapperResult {
     @Override
@@ -14,7 +15,7 @@ public class MapeoPaciente implements RowMapper<DtoPaciente>, MapperResult {
         Long id = rs.getLong("id");
         String nombre = rs.getString("nombre");
         String apellidos = rs.getString("apellidos");
-        Date fechaNacimiento = rs.getDate("fecha_nacimiento");
+        LocalDate fechaNacimiento = rs.getDate("fecha_nacimiento").toLocalDate();
         String correo = rs.getString("correo_electronico");
         Long telefono = rs.getLong("telefono");
         Integer idCategoria = rs.getInt("id_categoria");

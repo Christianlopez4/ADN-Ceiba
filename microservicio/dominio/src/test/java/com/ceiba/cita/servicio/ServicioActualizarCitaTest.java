@@ -7,9 +7,9 @@ import com.ceiba.cita.modelo.dto.DtoCita;
 import com.ceiba.cita.modelo.entidad.Cita;
 import com.ceiba.cita.puerto.dao.DaoCita;
 import com.ceiba.cita.puerto.repositorio.RepositorioCita;
-import com.ceiba.cita.servicio.testdatabuilder.CategoriaTestDataBuilder;
+import com.ceiba.cita.servicio.testdatabuilder.DtoCategoriaTestDataBuilder;
 import com.ceiba.cita.servicio.testdatabuilder.CitaTestDataBuilder;
-import com.ceiba.cita.servicio.testdatabuilder.PacienteTestDataBuilder;
+import com.ceiba.cita.servicio.testdatabuilder.DtoPacienteTestDataBuilder;
 import com.ceiba.paciente.modelo.dto.DtoPaciente;
 import com.ceiba.paciente.puerto.dao.DaoPaciente;
 import org.junit.Before;
@@ -81,9 +81,9 @@ public class ServicioActualizarCitaTest {
 
         Cita cita = new CitaTestDataBuilder().conFecha(LocalDate.of(2021,7,20)).build();
 
-        DtoPaciente dtoPaciente = new PacienteTestDataBuilder().build();
+        DtoPaciente dtoPaciente = new DtoPacienteTestDataBuilder().build();
 
-        DtoCategoria dtoCategoria = new CategoriaTestDataBuilder().build();
+        DtoCategoria dtoCategoria = new DtoCategoriaTestDataBuilder().build();
 
         Mockito.when(daoPaciente.buscar(cita.getIdPaciente())).thenReturn(dtoPaciente);
         Mockito.when(daoCategoria.buscar(dtoPaciente.getIdCategoria())).thenReturn(dtoCategoria);
@@ -105,9 +105,9 @@ public class ServicioActualizarCitaTest {
 
         DtoCita dtoCita = new CitaTestDataBuilder().conFecha(LocalDate.of(2021,7,19)).conEstado("CANCELADA").buildDto();
 
-        DtoPaciente dtoPaciente = new PacienteTestDataBuilder().build();
+        DtoPaciente dtoPaciente = new DtoPacienteTestDataBuilder().build();
 
-        DtoCategoria dtoCategoria = new CategoriaTestDataBuilder().build();
+        DtoCategoria dtoCategoria = new DtoCategoriaTestDataBuilder().build();
 
         Mockito.when(daoPaciente.buscar(cita.getIdPaciente())).thenReturn(dtoPaciente);
         Mockito.when(daoCategoria.buscar(dtoPaciente.getIdCategoria())).thenReturn(dtoCategoria);

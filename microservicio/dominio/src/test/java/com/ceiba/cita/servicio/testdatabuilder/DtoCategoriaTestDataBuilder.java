@@ -2,26 +2,26 @@ package com.ceiba.cita.servicio.testdatabuilder;
 
 import com.ceiba.categoria.modelo.dto.DtoCategoria;
 
-public class CategoriaTestDataBuilder {
+public class DtoCategoriaTestDataBuilder {
 
     private Integer id;
     private String titulo;
     private Double cuotaModeradora;
     private Double multa;
 
-    public CategoriaTestDataBuilder() {
+    public DtoCategoriaTestDataBuilder() {
         this.id = 1;
         this.titulo = "A";
         this.cuotaModeradora = 3000.0;
         this.multa = 5000.0;
     }
 
-    public CategoriaTestDataBuilder conCuotaModeradora(Double cuotaModeradora) {
+    public DtoCategoriaTestDataBuilder conCuotaModeradora(Double cuotaModeradora) {
         this.cuotaModeradora = cuotaModeradora;
         return this;
     }
 
-    public CategoriaTestDataBuilder conMulta(Double multa) {
+    public DtoCategoriaTestDataBuilder conMulta(Double multa) {
         this.multa = multa;
         return this;
     }

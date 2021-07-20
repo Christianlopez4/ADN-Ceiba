@@ -2,31 +2,31 @@ package com.ceiba.cita.servicio.testdatabuilder;
 
 import com.ceiba.paciente.modelo.dto.DtoPaciente;
 
-import java.sql.Date;
+import java.time.LocalDate;
 
-public class PacienteTestDataBuilder {
+public class DtoPacienteTestDataBuilder {
 
     private Long id;
     private String nombre;
     private String apellidos;
-    private Date fechaNacimiento;
+    private LocalDate fechaNacimiento;
     private String correoElectronico;
     private Long telefono;
     private Integer idCategoria;
     private Integer idDocumento;
 
-    public PacienteTestDataBuilder() {
+    public DtoPacienteTestDataBuilder() {
         this.id = 123L;
         this.nombre = "Christian";
         this.apellidos = "Lopez Cleves";
-        this.fechaNacimiento = new Date(1999,5,26);
+        this.fechaNacimiento = LocalDate.of(1999, 5, 26);
         this.correoElectronico = "christian@correo.com";
         this.telefono = 123456L;
         this.idCategoria = 1;
         this.idDocumento = 1;
     }
 
-    public PacienteTestDataBuilder conIdCategoria(Integer idCategoria) {
+    public DtoPacienteTestDataBuilder conIdCategoria(Integer idCategoria) {
         this.idCategoria = idCategoria;
         return this;
     }

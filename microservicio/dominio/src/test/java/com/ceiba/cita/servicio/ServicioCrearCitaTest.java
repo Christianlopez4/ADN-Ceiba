@@ -1,20 +1,18 @@
 package com.ceiba.cita.servicio;
 
-import com.ceiba.BasePrueba;
 import com.ceiba.categoria.modelo.dto.DtoCategoria;
 import com.ceiba.categoria.puerto.dao.DaoCategoria;
 import com.ceiba.cita.excepcion.ExcepcionDiaInvalido;
 import com.ceiba.cita.excepcion.ExcepcionMultipleCitaElMismoDia;
 import com.ceiba.cita.modelo.entidad.Cita;
 import com.ceiba.cita.puerto.repositorio.RepositorioCita;
-import com.ceiba.cita.servicio.testdatabuilder.CategoriaTestDataBuilder;
+import com.ceiba.cita.servicio.testdatabuilder.DtoCategoriaTestDataBuilder;
 import com.ceiba.cita.servicio.testdatabuilder.CitaTestDataBuilder;
-import com.ceiba.cita.servicio.testdatabuilder.PacienteTestDataBuilder;
+import com.ceiba.cita.servicio.testdatabuilder.DtoPacienteTestDataBuilder;
 import com.ceiba.paciente.modelo.dto.DtoPaciente;
 import com.ceiba.paciente.puerto.dao.DaoPaciente;
 import org.junit.Before;
 import org.junit.Test;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
@@ -24,7 +22,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import java.time.LocalDate;
 
-public class ServicioCrearCitaPrueba {
+public class ServicioCrearCitaTest {
 
    @Mock
    private RepositorioCita repositorioCita;
@@ -51,9 +49,9 @@ public class ServicioCrearCitaPrueba {
 
         Cita cita = new CitaTestDataBuilder().conFecha(LocalDate.of(2021,7,19)).build();
 
-        DtoPaciente dtoPaciente = new PacienteTestDataBuilder().build();
+        DtoPaciente dtoPaciente = new DtoPacienteTestDataBuilder().build();
 
-        DtoCategoria dtoCategoria = new CategoriaTestDataBuilder().build();
+        DtoCategoria dtoCategoria = new DtoCategoriaTestDataBuilder().build();
 
         Mockito.when(daoPaciente.buscar(cita.getIdPaciente())).thenReturn(dtoPaciente);
         Mockito.when(daoCategoria.buscar(dtoPaciente.getIdCategoria())).thenReturn(dtoCategoria);
@@ -102,9 +100,9 @@ public class ServicioCrearCitaPrueba {
 
         Cita cita = new CitaTestDataBuilder().conFecha(LocalDate.of(2021,7,20)).build();
 
-        DtoPaciente dtoPaciente = new PacienteTestDataBuilder().build();
+        DtoPaciente dtoPaciente = new DtoPacienteTestDataBuilder().build();
 
-        DtoCategoria dtoCategoria = new CategoriaTestDataBuilder().build();
+        DtoCategoria dtoCategoria = new DtoCategoriaTestDataBuilder().build();
 
         Mockito.when(daoPaciente.buscar(cita.getIdPaciente())).thenReturn(dtoPaciente);
         Mockito.when(daoCategoria.buscar(dtoPaciente.getIdCategoria())).thenReturn(dtoCategoria);
@@ -124,9 +122,9 @@ public class ServicioCrearCitaPrueba {
 
         Cita cita = new CitaTestDataBuilder().conFecha(LocalDate.of(2021,7,19)).build();
 
-        DtoPaciente dtoPaciente = new PacienteTestDataBuilder().build();
+        DtoPaciente dtoPaciente = new DtoPacienteTestDataBuilder().build();
 
-        DtoCategoria dtoCategoria = new CategoriaTestDataBuilder().build();
+        DtoCategoria dtoCategoria = new DtoCategoriaTestDataBuilder().build();
 
         Mockito.when(daoPaciente.buscar(cita.getIdPaciente())).thenReturn(dtoPaciente);
         Mockito.when(daoCategoria.buscar(dtoPaciente.getIdCategoria())).thenReturn(dtoCategoria);
