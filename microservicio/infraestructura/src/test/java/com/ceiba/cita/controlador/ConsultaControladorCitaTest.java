@@ -22,15 +22,7 @@ public class ConsultaControladorCitaTest {
 
     @Autowired
     private MockMvc mocMvc;
-
-    @Test
-    public void listar() throws Exception {
-        mocMvc.perform(get("/citas")
-                .contentType(MediaType.APPLICATION_JSON))
-                .andExpect(status().isOk())
-                .andExpect(jsonPath("$", hasSize(2)));
-    }
-
+    
     @Test
     public void buscar() throws Exception {
         mocMvc.perform(get("/citas/{id}", 1)
