@@ -3,7 +3,6 @@ package com.ceiba.documento.adaptador.dao;
 import com.ceiba.documento.modelo.dto.DtoDocumento;
 import com.ceiba.infraestructura.jdbc.MapperResult;
 import org.springframework.jdbc.core.RowMapper;
-
 import java.sql.ResultSet;
 import java.sql.SQLException;
 

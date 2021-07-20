@@ -13,7 +13,7 @@ import java.time.LocalTime;
 @Setter
 public class Cita {
 
-    public final static String MENSAJE_DIA_INVALIDO = "No es posible agendar citas los días sábados o domingos";
+    public static final String MENSAJE_DIA_INVALIDO = "No es posible agendar citas los días sábados o domingos";
 
     private Integer id;
     private LocalDate fecha;
@@ -41,6 +41,6 @@ public class Cita {
     }
 
     public boolean esCancelacion() {
-        return estado.equals("CANCELADA");
+        return "CANCELADA".equals(this.estado);
     }
 }
