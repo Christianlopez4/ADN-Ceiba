@@ -134,7 +134,7 @@ public class ServicioCrearCitaTest {
             servicioCrearCita.ejecutar(cita);
             fail();
         } catch (ExcepcionMultipleCitaElMismoDia e) {
-            assertEquals(ServicioCrearCita.MENSAJE_MULTIPLE_CITA, e.getMessage());
+            assertEquals(Cita.MENSAJE_MULTIPLE_CITA, e.getMessage());
         }
     }
 

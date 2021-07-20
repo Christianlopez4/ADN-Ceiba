@@ -14,6 +14,7 @@ import java.time.LocalTime;
 public class Cita {
 
     public static final String MENSAJE_DIA_INVALIDO = "No es posible agendar citas los días sábados o domingos";
+    public static final String MENSAJE_MULTIPLE_CITA = "No es posible agendar más de una cita el mismo día";
 
     private Integer id;
     private LocalDate fecha;

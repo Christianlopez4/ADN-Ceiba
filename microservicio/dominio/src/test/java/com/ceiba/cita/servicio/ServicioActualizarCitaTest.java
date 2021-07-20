@@ -70,7 +70,7 @@ public class ServicioActualizarCitaTest {
             servicioActualizarCita.ejecutar(cita);
             fail();
         } catch (ExcepcionMultipleCitaElMismoDia e) {
-            assertEquals(ServicioActualizarCita.MENSAJE_MULTIPLE_CITA, e.getMessage());
+            assertEquals(Cita.MENSAJE_MULTIPLE_CITA, e.getMessage());
         }
     }
 
@@ -97,7 +97,7 @@ public class ServicioActualizarCitaTest {
     }
 
     @Test
-    @DisplayName("Actualizar cita con multa")
+    @DisplayName("Cancelar cita con multa")
     public void testActualizarCita4() {
         Double valorEsperado = 5000.0;
 
@@ -117,7 +117,30 @@ public class ServicioActualizarCitaTest {
         servicioActualizarCita.ejecutar(cita);
 
         Double valorActual = cita.getCosto();
+        assertEquals(valorEsperado, valorActual);
+    }
 
+    @Test
+    @DisplayName("Cancelar cita sin multa")
+    public void testActualizarCita5() {
+        Double valorEsperado = 0.0;
+
+        Cita cita = new CitaTestDataBuilder().conId(2).conFecha(LocalDate.of(2021,7,19)).conEstado("CANCELADA").build();
+
+        DtoCita dtoCita = new CitaTestDataBuilder().conId(2).conFecha(LocalDate.of(2021,7,23)).conEstado("CANCELADA").buildDto();
+
+        DtoPaciente dtoPaciente = new DtoPacienteTestDataBuilder().build();
+
+        DtoCategoria dtoCategoria = new DtoCategoriaTestDataBuilder().build();
+
+        Mockito.when(daoPaciente.buscar(cita.getIdPaciente())).thenReturn(dtoPaciente);
+        Mockito.when(daoCategoria.buscar(dtoPaciente.getIdCategoria())).thenReturn(dtoCategoria);
+        Mockito.when(daoCita.buscar(cita.getId())).thenReturn(dtoCita);
+        Mockito.when(repositorioCita.existeMultipleCita(cita.getIdPaciente(), cita.getFecha())).thenReturn(false);
+
+        servicioActualizarCita.ejecutar(cita);
+
+        Double valorActual = cita.getCosto();
         assertEquals(valorEsperado, valorActual);
     }
 }

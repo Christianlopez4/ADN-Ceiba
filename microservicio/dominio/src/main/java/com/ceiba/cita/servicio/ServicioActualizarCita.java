@@ -16,8 +16,6 @@ import java.time.LocalDate;
 
 public class ServicioActualizarCita {
 
-    public static final String MENSAJE_MULTIPLE_CITA = "No es posible agendar más de una cita el mismo día";
-
     private RepositorioCita repositorioCita;
 
     private HolidayUtil holidayUtil;
@@ -78,7 +76,7 @@ public class ServicioActualizarCita {
     private void validarMultipleCitaElMismoDia(Cita cita) throws ExcepcionMultipleCitaElMismoDia {
         boolean esMultiple = this.repositorioCita.existeMultipleCita(cita.getIdPaciente(), cita.getFecha());
         if (esMultiple) {
-            throw new ExcepcionMultipleCitaElMismoDia(MENSAJE_MULTIPLE_CITA);
+            throw new ExcepcionMultipleCitaElMismoDia(Cita.MENSAJE_MULTIPLE_CITA);
         }
     }
 }

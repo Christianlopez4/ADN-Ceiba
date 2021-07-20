@@ -4,7 +4,6 @@ import com.ceiba.infraestructura.jdbc.MapperResult;
 import com.ceiba.paciente.modelo.dto.DtoPaciente;
 import org.springframework.jdbc.core.RowMapper;
 
-import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
