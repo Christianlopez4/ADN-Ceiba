@@ -22,7 +22,7 @@ public class ConsultaControladorCitaTest {
 
     @Autowired
     private MockMvc mocMvc;
-    
+
     @Test
     public void buscar() throws Exception {
         mocMvc.perform(get("/citas/{id}", 1)

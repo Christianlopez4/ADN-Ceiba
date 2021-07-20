@@ -16,7 +16,7 @@ import java.time.LocalDate;
 
 public class ServicioActualizarCita {
 
-    public final static String MENSAJE_MULTIPLE_CITA = "No es posible agendar más de una cita el mismo día";
+    public static final String MENSAJE_MULTIPLE_CITA = "No es posible agendar más de una cita el mismo día";
 
     private RepositorioCita repositorioCita;
 
@@ -48,7 +48,7 @@ public class ServicioActualizarCita {
     }
 
     public void validarCostoCancelacion(Cita cita) {
-        Double costoCancelacion = 0.0;
+        Double costoCancelacion;
         DtoCita dtoCita = this.daoCita.buscar(cita.getId());
         if (LocalDate.now().equals(dtoCita.getFecha())) {
             Long idPaciente = cita.getIdPaciente();
@@ -58,6 +58,8 @@ public class ServicioActualizarCita {
             DtoCategoria dtoCategoria = this.daoCategoria.buscar(idCategoria);
 
             costoCancelacion = dtoCategoria.getMulta();
+        } else {
+            costoCancelacion = 0.0;
         }
         cita.setCosto(costoCancelacion);
     }

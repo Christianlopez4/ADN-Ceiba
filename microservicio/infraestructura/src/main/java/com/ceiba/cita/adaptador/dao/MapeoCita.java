@@ -3,15 +3,10 @@ package com.ceiba.cita.adaptador.dao;
 import com.ceiba.cita.modelo.dto.DtoCita;
 import com.ceiba.infraestructura.jdbc.MapperResult;
 import org.springframework.jdbc.core.RowMapper;
-
-import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Time;
-import java.time.Instant;
 import java.time.LocalDate;
 import java.time.LocalTime;
-import java.time.ZoneId;
 
 public class MapeoCita implements RowMapper<DtoCita>, MapperResult {
     @Override
