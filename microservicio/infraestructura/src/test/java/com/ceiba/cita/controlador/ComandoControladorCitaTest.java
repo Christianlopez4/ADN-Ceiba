@@ -35,18 +35,16 @@ public class ComandoControladorCitaTest {
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(objectMapper.writeValueAsString(comandoCita)))
                 .andExpect(status().isOk())
-                .andExpect(content().json("{'valor': 2}"));
+                .andExpect(content().json("{'valor': 3}"));
     }
 
     @Test
     public void actualizar() throws Exception {
-        Long id = 1L;
-        ComandoCita comandoCita = new ComandoCitaTestDataBuilder().conIdPaciente(id).build();
+        ComandoCita comandoCita = new ComandoCitaTestDataBuilder().conId(2).conIdPaciente(2L).build();
 
         mocMvc.perform(put("/citas/{id}", comandoCita.getId())
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(objectMapper.writeValueAsString(comandoCita)))
                 .andExpect(status().isOk());
-
     }
 }
