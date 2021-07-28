@@ -9,6 +9,7 @@ import com.ceiba.cita.puerto.repositorio.RepositorioCita;
 import com.ceiba.cita.servicio.testdatabuilder.DtoCategoriaTestDataBuilder;
 import com.ceiba.cita.servicio.testdatabuilder.CitaTestDataBuilder;
 import com.ceiba.cita.servicio.testdatabuilder.DtoPacienteTestDataBuilder;
+import com.ceiba.cita.utils.HolidayUtil;
 import com.ceiba.paciente.modelo.dto.DtoPaciente;
 import com.ceiba.paciente.puerto.dao.DaoPaciente;
 import org.junit.Before;
@@ -33,6 +34,12 @@ public class ServicioCrearCitaTest {
    @Mock
    private DaoCategoria daoCategoria;
 
+   @Mock
+   private ServicioCita servicioCita;
+
+   @Mock
+   private HolidayUtil holidayUtil;
+
    @InjectMocks
    private ServicioCrearCita servicioCrearCita;
 
@@ -55,7 +62,8 @@ public class ServicioCrearCitaTest {
 
         Mockito.when(daoPaciente.buscar(cita.getIdPaciente())).thenReturn(dtoPaciente);
         Mockito.when(daoCategoria.buscar(dtoPaciente.getIdCategoria())).thenReturn(dtoCategoria);
-        Mockito.when(repositorioCita.existeMultipleCita(cita.getIdPaciente(), cita.getFecha())).thenReturn(false);
+        Mockito.when(servicioCita.validarFestivo(cita)).thenReturn(cita);
+        Mockito.when(servicioCita.validarMultipleCitaElMismoDia(cita)).thenReturn(cita);
         Mockito.when(repositorioCita.crear(cita)).thenReturn(1L);
 
         Long valorActual = servicioCrearCita.ejecutar(cita);
@@ -94,29 +102,6 @@ public class ServicioCrearCitaTest {
     }
 
     @Test
-    @DisplayName("Agregar cita con sobrecosto")
-    public void testAgregarCita4() {
-        Double valorEsperado = 6000.0;
-
-        Cita cita = new CitaTestDataBuilder().conFecha(LocalDate.of(2021,7,20)).build();
-
-        DtoPaciente dtoPaciente = new DtoPacienteTestDataBuilder().build();
-
-        DtoCategoria dtoCategoria = new DtoCategoriaTestDataBuilder().build();
-
-        Mockito.when(daoPaciente.buscar(cita.getIdPaciente())).thenReturn(dtoPaciente);
-        Mockito.when(daoCategoria.buscar(dtoPaciente.getIdCategoria())).thenReturn(dtoCategoria);
-        Mockito.when(repositorioCita.existeMultipleCita(cita.getIdPaciente(), cita.getFecha())).thenReturn(false);
-        Mockito.when(repositorioCita.crear(cita)).thenReturn(1L);
-
-        servicioCrearCita.ejecutar(cita);
-
-        Double valorActual = cita.getCosto();
-
-        assertEquals(valorEsperado, valorActual);
-    }
-
-    @Test
     @DisplayName("No es posible agregar cita por múltiple cita el mismo día")
     public void testAgregarCita5() {
 
@@ -128,6 +113,8 @@ public class ServicioCrearCitaTest {
 
         Mockito.when(daoPaciente.buscar(cita.getIdPaciente())).thenReturn(dtoPaciente);
         Mockito.when(daoCategoria.buscar(dtoPaciente.getIdCategoria())).thenReturn(dtoCategoria);
+        Mockito.when(servicioCita.validarFestivo(cita)).thenReturn(cita);
+        Mockito.when(servicioCita.validarMultipleCitaElMismoDia(cita)).thenThrow(new ExcepcionMultipleCitaElMismoDia(Cita.MENSAJE_MULTIPLE_CITA));
         Mockito.when(repositorioCita.existeMultipleCita(cita.getIdPaciente(), cita.getFecha())).thenReturn(true);
 
         try {

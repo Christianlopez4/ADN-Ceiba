@@ -39,6 +39,9 @@ public class ServicioActualizarCitaTest {
     @Mock
     private DaoCita daoCita;
 
+    @Mock
+    private ServicioCita servicioCita;
+
     @InjectMocks
     private ServicioActualizarCita servicioActualizarCita;
 
@@ -65,7 +68,8 @@ public class ServicioActualizarCitaTest {
     @DisplayName("No es posible agregar cita por múltiple cita el mismo día")
     public void testActualizarCita2() {
         Cita cita = new CitaTestDataBuilder().conFecha(LocalDate.of(2021,7,19)).build();
-        Mockito.when(repositorioCita.existeMultipleCita(cita.getIdPaciente(), cita.getFecha())).thenReturn(true);
+        Mockito.when(servicioCita.validarFestivo(cita)).thenReturn(cita);
+        Mockito.when(servicioCita.validarMultipleCitaElMismoDia(cita)).thenThrow(new ExcepcionMultipleCitaElMismoDia(Cita.MENSAJE_MULTIPLE_CITA));
         try {
             servicioActualizarCita.ejecutar(cita);
             fail();
@@ -75,35 +79,13 @@ public class ServicioActualizarCitaTest {
     }
 
     @Test
-    @DisplayName("Actualizar cita con sobrecostos")
-    public void testActualizarCita3() {
-        Double valorEsperado = 6000.0;
-
-        Cita cita = new CitaTestDataBuilder().conFecha(LocalDate.of(2021,7,20)).build();
-
-        DtoPaciente dtoPaciente = new DtoPacienteTestDataBuilder().build();
-
-        DtoCategoria dtoCategoria = new DtoCategoriaTestDataBuilder().build();
-
-        Mockito.when(daoPaciente.buscar(cita.getIdPaciente())).thenReturn(dtoPaciente);
-        Mockito.when(daoCategoria.buscar(dtoPaciente.getIdCategoria())).thenReturn(dtoCategoria);
-        Mockito.when(repositorioCita.existeMultipleCita(cita.getIdPaciente(), cita.getFecha())).thenReturn(false);
-
-        servicioActualizarCita.ejecutar(cita);
-
-        Double valorActual = cita.getCosto();
-
-        assertEquals(valorEsperado, valorActual);
-    }
-
-    @Test
     @DisplayName("Cancelar cita con multa")
     public void testActualizarCita4() {
         Double valorEsperado = 5000.0;
 
-        Cita cita = new CitaTestDataBuilder().conId(2).conFecha(LocalDate.of(2021,7,19)).conEstado("CANCELADA").build();
+        Cita cita = new CitaTestDataBuilder().conFecha(LocalDate.of(2021,7,19)).conEstado("CANCELADA").build();
 
-        DtoCita dtoCita = new CitaTestDataBuilder().conId(2).conFecha(LocalDate.of(2021,7,19)).conEstado("CANCELADA").buildDto();
+        DtoCita dtoCita = new CitaTestDataBuilder().conFecha(LocalDate.of(2021,7,19)).conEstado("CANCELADA").buildDto();
 
         DtoPaciente dtoPaciente = new DtoPacienteTestDataBuilder().build();
 
@@ -112,7 +94,6 @@ public class ServicioActualizarCitaTest {
         Mockito.when(daoPaciente.buscar(cita.getIdPaciente())).thenReturn(dtoPaciente);
         Mockito.when(daoCategoria.buscar(dtoPaciente.getIdCategoria())).thenReturn(dtoCategoria);
         Mockito.when(daoCita.buscar(cita.getId())).thenReturn(dtoCita);
-        Mockito.when(repositorioCita.existeMultipleCita(cita.getIdPaciente(), cita.getFecha())).thenReturn(false);
 
         servicioActualizarCita.ejecutar(cita);
 
@@ -125,9 +106,9 @@ public class ServicioActualizarCitaTest {
     public void testActualizarCita5() {
         Double valorEsperado = 0.0;
 
-        Cita cita = new CitaTestDataBuilder().conId(2).conFecha(LocalDate.of(2021,7,19)).conEstado("CANCELADA").build();
+        Cita cita = new CitaTestDataBuilder().conFecha(LocalDate.of(2021,7,19)).conEstado("CANCELADA").build();
 
-        DtoCita dtoCita = new CitaTestDataBuilder().conId(2).conFecha(LocalDate.of(2021,7,23)).conEstado("CANCELADA").buildDto();
+        DtoCita dtoCita = new CitaTestDataBuilder().conFecha(LocalDate.of(2021,7,23)).conEstado("CANCELADA").buildDto();
 
         DtoPaciente dtoPaciente = new DtoPacienteTestDataBuilder().build();
 
@@ -136,7 +117,6 @@ public class ServicioActualizarCitaTest {
         Mockito.when(daoPaciente.buscar(cita.getIdPaciente())).thenReturn(dtoPaciente);
         Mockito.when(daoCategoria.buscar(dtoPaciente.getIdCategoria())).thenReturn(dtoCategoria);
         Mockito.when(daoCita.buscar(cita.getId())).thenReturn(dtoCita);
-        Mockito.when(repositorioCita.existeMultipleCita(cita.getIdPaciente(), cita.getFecha())).thenReturn(false);
 
         servicioActualizarCita.ejecutar(cita);
 

@@ -38,6 +38,11 @@ public class CitaTestDataBuilder {
         return this;
     }
 
+    public CitaTestDataBuilder conCosto(Double costo) {
+        this.costo = costo;
+        return this;
+    }
+
     public Cita build() {
         return new Cita(id, fecha, hora, costo, idPaciente, estado);
     }

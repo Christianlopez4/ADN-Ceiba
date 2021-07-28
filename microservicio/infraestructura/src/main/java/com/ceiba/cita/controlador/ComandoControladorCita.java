@@ -5,6 +5,8 @@ import com.ceiba.cita.comando.ComandoCita;
 import com.ceiba.cita.comando.manejador.ManejadorActualizarCita;
 import com.ceiba.cita.comando.manejador.ManejadorCrearCita;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -18,8 +20,13 @@ public class ComandoControladorCita {
     private ManejadorActualizarCita manejadorActualizarCita;
 
     @PostMapping
-    public ComandoRespuesta<Long> crear(@RequestBody ComandoCita comandoCita) {
-        return manejadorCrearCita.ejecutar(comandoCita);
+    @CrossOrigin(origins = "http://localhost:4200")
+    public ResponseEntity<ComandoRespuesta<Long>> crear(@RequestBody ComandoCita comandoCita) {
+        try {
+            return new ResponseEntity<>(manejadorCrearCita.ejecutar(comandoCita), HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity(e.getMessage(), HttpStatus.BAD_REQUEST);
+        }
     }
 
     @PutMapping(value="/{id}")
