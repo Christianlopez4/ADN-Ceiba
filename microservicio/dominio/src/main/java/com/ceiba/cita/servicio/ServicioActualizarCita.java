@@ -33,8 +33,8 @@ public class ServicioActualizarCita {
         if (cita.esCancelacion()) {
             calcularCostoCancelacion(cita);
         } else {
-            servicioCita.validarFestivo(cita);
-            servicioCita.validarMultipleCitaElMismoDia(cita);
+            cita = servicioCita.validarFestivo(cita);
+            cita = servicioCita.validarMultipleCitaElMismoDia(cita);
         }
 
         this.repositorioCita.actualizar(cita);

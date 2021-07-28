@@ -9,7 +9,6 @@ import com.ceiba.cita.puerto.repositorio.RepositorioCita;
 import com.ceiba.cita.servicio.testdatabuilder.DtoCategoriaTestDataBuilder;
 import com.ceiba.cita.servicio.testdatabuilder.CitaTestDataBuilder;
 import com.ceiba.cita.servicio.testdatabuilder.DtoPacienteTestDataBuilder;
-import com.ceiba.cita.utils.HolidayUtil;
 import com.ceiba.paciente.modelo.dto.DtoPaciente;
 import com.ceiba.paciente.puerto.dao.DaoPaciente;
 import org.junit.Before;
@@ -37,9 +36,6 @@ public class ServicioCrearCitaTest {
    @Mock
    private ServicioCita servicioCita;
 
-   @Mock
-   private HolidayUtil holidayUtil;
-
    @InjectMocks
    private ServicioCrearCita servicioCrearCita;
 
@@ -49,7 +45,7 @@ public class ServicioCrearCitaTest {
    }
 
     @Test
-    @DisplayName("Agregar cita sin sobrecosto")
+    @DisplayName("Agregar cita sin sobrecostos")
     public void testAgregarCita1() {
 
         Long valorEsperado = 1L;
@@ -67,7 +63,6 @@ public class ServicioCrearCitaTest {
         Mockito.when(repositorioCita.crear(cita)).thenReturn(1L);
 
         Long valorActual = servicioCrearCita.ejecutar(cita);
-
         assertEquals(valorEsperado, valorActual);
     }
 
@@ -86,7 +81,6 @@ public class ServicioCrearCitaTest {
 
     }
 
-
     @Test
     @DisplayName("No es posible agregar cita los días domingos")
     public void testAgregarCita3() {
@@ -103,7 +97,7 @@ public class ServicioCrearCitaTest {
 
     @Test
     @DisplayName("No es posible agregar cita por múltiple cita el mismo día")
-    public void testAgregarCita5() {
+    public void testAgregarCita4() {
 
         Cita cita = new CitaTestDataBuilder().conFecha(LocalDate.of(2021,7,19)).build();
 

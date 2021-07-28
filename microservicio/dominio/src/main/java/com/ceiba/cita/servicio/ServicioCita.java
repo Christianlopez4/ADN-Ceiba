@@ -23,7 +23,6 @@ public class ServicioCita {
         int dia = fecha.getDayOfMonth();
         int mes = fecha.getMonthValue();
         Boolean esFestivo = this.holidayUtil.isHoliday(mes, dia);
-
         if (esFestivo) {
             cita.setCosto(cita.getCosto() * 2);
         }
