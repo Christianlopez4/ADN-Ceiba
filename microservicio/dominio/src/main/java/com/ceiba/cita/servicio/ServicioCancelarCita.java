@@ -28,13 +28,14 @@ public class ServicioCancelarCita {
         this.daoCita = daoCita;
     }
 
-    public void ejecutar(Integer id) {
+    public Cita ejecutar(Integer id) {
         DtoCita dtocita = this.daoCita.buscar(id);
         Cita cita = this.toCita(dtocita);
         Double costoCancelacion = this.calcularCostoCancelacion(cita);
         cita.setCosto(costoCancelacion);
         cita.setEstado("CANCELADA");
         this.repositorioCita.actualizar(cita);
+        return cita;
     }
 
     private Double calcularCostoCancelacion(Cita cita) {

@@ -47,4 +47,11 @@ public class ComandoControladorCitaTest {
                 .content(objectMapper.writeValueAsString(comandoCita)))
                 .andExpect(status().isOk());
     }
+
+    @Test
+    public void cancelar() throws Exception {
+        mocMvc.perform(put("/citas/{id}/cancelar", 1))
+                .andExpect(status().isOk());
+
+    }
 }
