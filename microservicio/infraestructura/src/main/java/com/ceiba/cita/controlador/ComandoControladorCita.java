@@ -29,7 +29,7 @@ public class ComandoControladorCita {
         try {
             return new ResponseEntity<>(manejadorCrearCita.ejecutar(comandoCita), HttpStatus.OK);
         } catch (Exception e) {
-            return new ResponseEntity(e.getMessage(), HttpStatus.BAD_REQUEST);
+            return new ResponseEntity(e, HttpStatus.BAD_REQUEST);
         }
     }
 

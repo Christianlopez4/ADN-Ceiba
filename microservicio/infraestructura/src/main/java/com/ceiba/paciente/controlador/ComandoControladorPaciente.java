@@ -21,7 +21,7 @@ public class ComandoControladorPaciente {
         try {
             return new ResponseEntity<>(manejadorCrearPaciente.ejecutar(comandoPaciente), HttpStatus.OK);
         } catch (Exception e) {
-            return new ResponseEntity(e.getMessage(), HttpStatus.BAD_REQUEST);
+            return new ResponseEntity(e, HttpStatus.BAD_REQUEST);
         }
     }
 }
