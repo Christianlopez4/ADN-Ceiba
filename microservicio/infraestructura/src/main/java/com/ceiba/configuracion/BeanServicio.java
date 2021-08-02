@@ -4,6 +4,7 @@ import com.ceiba.categoria.puerto.dao.DaoCategoria;
 import com.ceiba.cita.puerto.dao.DaoCita;
 import com.ceiba.cita.puerto.repositorio.RepositorioCita;
 import com.ceiba.cita.servicio.ServicioActualizarCita;
+import com.ceiba.cita.servicio.ServicioCancelarCita;
 import com.ceiba.cita.servicio.ServicioCita;
 import com.ceiba.cita.servicio.ServicioCrearCita;
 import com.ceiba.paciente.puerto.dao.DaoPaciente;
@@ -26,12 +27,17 @@ public class BeanServicio {
     }
 
     @Bean
-    public ServicioActualizarCita servicioActualizarCita(RepositorioCita repositorioCita, DaoPaciente daoPaciente, DaoCategoria daoCategoria, DaoCita daoCita, ServicioCita servicioCita) {
-        return new ServicioActualizarCita(repositorioCita, daoPaciente, daoCategoria, daoCita, servicioCita);
+    public ServicioActualizarCita servicioActualizarCita(RepositorioCita repositorioCita, ServicioCita servicioCita) {
+        return new ServicioActualizarCita(repositorioCita, servicioCita);
     }
 
     @Bean
     public ServicioCita servicioCita(RepositorioCita repositorioCita) {
         return new ServicioCita(repositorioCita);
+    }
+
+    @Bean
+    public ServicioCancelarCita servicioCancelarCita(RepositorioCita repositorioCita, DaoPaciente daoPaciente, DaoCategoria daoCategoria, DaoCita daoCita) {
+        return new ServicioCancelarCita(repositorioCita, daoPaciente, daoCategoria, daoCita);
     }
 }

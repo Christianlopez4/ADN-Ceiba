@@ -1,17 +1,9 @@
 package com.ceiba.cita.servicio;
 
-import com.ceiba.categoria.modelo.dto.DtoCategoria;
-import com.ceiba.categoria.puerto.dao.DaoCategoria;
 import com.ceiba.cita.excepcion.ExcepcionMultipleCitaElMismoDia;
-import com.ceiba.cita.modelo.dto.DtoCita;
 import com.ceiba.cita.modelo.entidad.Cita;
-import com.ceiba.cita.puerto.dao.DaoCita;
 import com.ceiba.cita.puerto.repositorio.RepositorioCita;
-import com.ceiba.cita.servicio.testdatabuilder.DtoCategoriaTestDataBuilder;
 import com.ceiba.cita.servicio.testdatabuilder.CitaTestDataBuilder;
-import com.ceiba.cita.servicio.testdatabuilder.DtoPacienteTestDataBuilder;
-import com.ceiba.paciente.modelo.dto.DtoPaciente;
-import com.ceiba.paciente.puerto.dao.DaoPaciente;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.jupiter.api.DisplayName;
@@ -29,15 +21,6 @@ public class ServicioActualizarCitaTest {
 
     @Mock
     private RepositorioCita repositorioCita;
-
-    @Mock
-    private DaoPaciente daoPaciente;
-
-    @Mock
-    private DaoCategoria daoCategoria;
-
-    @Mock
-    private DaoCita daoCita;
 
     @Mock
     private ServicioCita servicioCita;
@@ -78,51 +61,6 @@ public class ServicioActualizarCitaTest {
         }
     }
 
-    @Test
-    @DisplayName("Cancelar cita con multa")
-    public void testActualizarCita4() {
-        Double valorEsperado = 5000.0;
-
-        Cita cita = new CitaTestDataBuilder().conFecha(LocalDate.of(2021,7,19)).conEstado("CANCELADA").build();
-
-        DtoCita dtoCita = new CitaTestDataBuilder().conFecha(LocalDate.of(2021,7,19)).conEstado("CANCELADA").buildDto();
-
-        DtoPaciente dtoPaciente = new DtoPacienteTestDataBuilder().build();
-
-        DtoCategoria dtoCategoria = new DtoCategoriaTestDataBuilder().build();
-
-        Mockito.when(daoPaciente.buscar(cita.getIdPaciente())).thenReturn(dtoPaciente);
-        Mockito.when(daoCategoria.buscar(dtoPaciente.getIdCategoria())).thenReturn(dtoCategoria);
-        Mockito.when(daoCita.buscar(cita.getId())).thenReturn(dtoCita);
-
-        servicioActualizarCita.ejecutar(cita);
-
-        Double valorActual = cita.getCosto();
-        assertEquals(valorEsperado, valorActual);
-    }
-
-    @Test
-    @DisplayName("Cancelar cita sin multa")
-    public void testActualizarCita5() {
-        Double valorEsperado = 0.0;
-
-        Cita cita = new CitaTestDataBuilder().conFecha(LocalDate.of(2021,7,19)).conEstado("CANCELADA").build();
-
-        DtoCita dtoCita = new CitaTestDataBuilder().conFecha(LocalDate.of(2021,7,23)).conEstado("CANCELADA").buildDto();
-
-        DtoPaciente dtoPaciente = new DtoPacienteTestDataBuilder().build();
-
-        DtoCategoria dtoCategoria = new DtoCategoriaTestDataBuilder().build();
-
-        Mockito.when(daoPaciente.buscar(cita.getIdPaciente())).thenReturn(dtoPaciente);
-        Mockito.when(daoCategoria.buscar(dtoPaciente.getIdCategoria())).thenReturn(dtoCategoria);
-        Mockito.when(daoCita.buscar(cita.getId())).thenReturn(dtoCita);
-
-        servicioActualizarCita.ejecutar(cita);
-
-        Double valorActual = cita.getCosto();
-        assertEquals(valorEsperado, valorActual);
-    }
 }
 
 

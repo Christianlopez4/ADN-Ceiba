@@ -3,6 +3,7 @@ package com.ceiba.cita.controlador;
 import com.ceiba.ComandoRespuesta;
 import com.ceiba.cita.comando.ComandoCita;
 import com.ceiba.cita.comando.manejador.ManejadorActualizarCita;
+import com.ceiba.cita.comando.manejador.ManejadorCancelarCita;
 import com.ceiba.cita.comando.manejador.ManejadorCrearCita;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -19,6 +20,9 @@ public class ComandoControladorCita {
     @Autowired
     private ManejadorActualizarCita manejadorActualizarCita;
 
+    @Autowired
+    private ManejadorCancelarCita manejadorCancelarCita;
+
     @PostMapping
     @CrossOrigin(origins = "http://localhost:4200")
     public ResponseEntity<ComandoRespuesta<Long>> crear(@RequestBody ComandoCita comandoCita) {
@@ -33,5 +37,10 @@ public class ComandoControladorCita {
     public void actualizar(@RequestBody ComandoCita comandoCita, @PathVariable Integer id) {
         comandoCita.setId(id);
         manejadorActualizarCita.ejecutar(comandoCita);
+    }
+
+    @PutMapping("/{id}/cancelar")
+    public void cancelar(@PathVariable Integer id) {
+        manejadorCancelarCita.ejecutar(id);
     }
 }

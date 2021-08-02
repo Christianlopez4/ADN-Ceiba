@@ -14,9 +14,6 @@ public class ManejadorActualizarCita {
     private FabricaCita fabricaCita;
     private ServicioActualizarCita servicioActualizarCita;
 
-    @Autowired
-    private DaoCita daoCita;
-
     public ManejadorActualizarCita(FabricaCita fabricaCita, ServicioActualizarCita servicioActualizarCita) {
         this.fabricaCita = fabricaCita;
         this.servicioActualizarCita = servicioActualizarCita;
