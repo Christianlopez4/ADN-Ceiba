@@ -43,7 +43,6 @@ public class ComandoControladorCita {
     @DeleteMapping("/{id}/cancelar")
     @CrossOrigin(origins = "http://localhost:4200")
     public void cancelar(@PathVariable Integer id) {
-        System.out.println(id);
         manejadorCancelarCita.ejecutar(id);
     }
 }

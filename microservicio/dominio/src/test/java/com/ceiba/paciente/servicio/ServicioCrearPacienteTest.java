@@ -86,4 +86,20 @@ public class ServicioCrearPacienteTest {
             assertEquals(e.getMessage(), Paciente.CORREO_NO_VACIO);
         }
     }
+
+    @Test
+    @DisplayName("Agregar paciente correctamente")
+    public void agregarPacienteTest6() {
+        Paciente paciente = new PacienteTestDataBuilder().build();
+
+        Mockito.when(repositorioPaciente.existePorId(paciente.getId())).thenReturn(true);
+        Mockito.when(repositorioPaciente.crear(paciente)).thenReturn(paciente.getId());
+
+        try {
+            servicioCrearPaciente.ejecutar(paciente);
+            fail();
+        } catch (RuntimeException e) {
+            assertEquals(e.getMessage(), ServicioCrearPaciente.PACIENTE_EXISTENTE);
+        }
+    }
 }
