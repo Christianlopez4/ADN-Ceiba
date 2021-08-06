@@ -34,13 +34,16 @@ public class ComandoControladorCita {
     }
 
     @PutMapping(value="/{id}")
+    @CrossOrigin(origins = "http://localhost:4200")
     public void actualizar(@RequestBody ComandoCita comandoCita, @PathVariable Integer id) {
         comandoCita.setId(id);
         manejadorActualizarCita.ejecutar(comandoCita);
     }
 
-    @PutMapping("/{id}/cancelar")
+    @DeleteMapping("/{id}/cancelar")
+    @CrossOrigin(origins = "http://localhost:4200")
     public void cancelar(@PathVariable Integer id) {
+        System.out.println(id);
         manejadorCancelarCita.ejecutar(id);
     }
 }

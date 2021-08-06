@@ -27,6 +27,26 @@ public class PacienteTestDataBuilder {
         this.idDocumento = 1;
     }
 
+    public PacienteTestDataBuilder conID(Long id) {
+        this.id = id;
+        return this;
+    }
+
+    public PacienteTestDataBuilder conNombre(String nombre) {
+        this.nombre = nombre;
+        return this;
+    }
+
+    public PacienteTestDataBuilder conApellido(String apellidos) {
+        this.apellidos = apellidos;
+        return this;
+    }
+
+    public PacienteTestDataBuilder conCorreo(String correoElectronico) {
+        this.correoElectronico = correoElectronico;
+        return this;
+    }
+
     public PacienteTestDataBuilder conIdCategoria(Integer idCategoria) {
         this.idCategoria = idCategoria;
         return this;

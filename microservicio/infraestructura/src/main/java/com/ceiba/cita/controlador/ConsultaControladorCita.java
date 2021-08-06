@@ -27,6 +27,7 @@ public class ConsultaControladorCita {
     }
 
     @GetMapping("/{id}")
+    @CrossOrigin(origins = "http://localhost:4200")
     public ResponseEntity<DtoCita> buscar(@PathVariable Integer id) {
         return new ResponseEntity<>(manejadorBuscarCita.buscar(id), HttpStatus.OK);
     }

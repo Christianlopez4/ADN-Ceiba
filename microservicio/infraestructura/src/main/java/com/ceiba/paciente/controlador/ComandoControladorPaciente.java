@@ -19,7 +19,7 @@ public class ComandoControladorPaciente {
     @CrossOrigin(origins = "http://localhost:4200")
     public ResponseEntity<ComandoRespuesta<Long>> crear(@RequestBody ComandoPaciente comandoPaciente) {
         try {
-            return new ResponseEntity<>(manejadorCrearPaciente.ejecutar(comandoPaciente), HttpStatus.OK);
+            return new ResponseEntity<>(manejadorCrearPaciente.ejecutar(comandoPaciente), HttpStatus.CREATED);
         } catch (Exception e) {
             return new ResponseEntity(e, HttpStatus.BAD_REQUEST);
         }
